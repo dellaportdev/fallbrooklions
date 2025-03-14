@@ -41,23 +41,42 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const secondAndFourthTuesdays2025 = [
+                "01-14", "01-28",
+                "02-11", "02-25",
+                "03-11", "03-25",
+                "04-08", "04-22",
+                "05-13", "05-27",
+                "06-10", "06-24",
+                "07-08", "07-22",
+                "08-12", "08-26",
+                "09-09", "09-23",
+                "10-14", "10-28",
+                "11-11", "11-25",
+                "12-09", "12-23"
+            ];
+
             const updateMeetingDate = () => {
                 const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth();
-                const tuesdays = [];
+                const currentYear = now.getFullYear();
                 
-                for (let i = 1; i <= 31; i++) {
-                    const date = new Date(year, month, i);
-                    if (date.getMonth() === month && date.getDay() === 2) tuesdays.push(date);
-                }
-                
-                const nextMeeting = tuesdays.find(t => t > now || (t.toDateString() === now.toDateString() && t.setDate(t.getDate() + 7))) || tuesdays[0];
-                const options = { weekday: 'long', month: 'long', day: 'numeric' };
-                document.getElementById('next-meeting').innerText = `Next Meeting : ${nextMeeting.toLocaleDateString('en-US', options)}.`;
+                const nextMeetingStr = secondAndFourthTuesdays2025.find(dateStr => {
+                    const [month, day] = dateStr.split("-").map(Number);
+                    const meetingDate = new Date(currentYear, month - 1, day);
+                    return meetingDate > now;
+                });
+
+                if (!nextMeetingStr) return;
+
+                const [month, day] = nextMeetingStr.split("-").map(Number);
+                const monthNames = ["January", "February", "March", "April", "May", "June", 
+                                    "July", "August", "September", "October", "November", "December"];
+
+                const nextMeetingText = `Next Meeting: Tuesday, ${monthNames[month - 1]} ${day}, 2025`;
+
+                document.getElementById('next-meeting').innerText = nextMeetingText;
             };
-    
-            // updateMeetingDate();
+            updateMeetingDate();
         });
     </script>
        
@@ -91,7 +110,7 @@
     
         <p class="text-xl font-extrabold mt-6 mb-2 text-gray-700">When</p>
         <p class="text-md">Meetings on the 2nd and 4th Tuesday of the month. <span class="font-medium">6:00 p.m.</span></p>
-        <p class="mt-2 font-semibold text-red-700" id="next-meeting">Next Meeting : Tuesday, March, 25, 2025</p>
+        <p class="mt-2 font-semibold text-red-700" id="next-meeting"></p>
         
         <p class="text-xl font-extrabold mt-6 mb-2 text-gray-700">Where</p>
         <p class="mt-4">Community Health & Wellness Center</p>
@@ -115,7 +134,7 @@
                 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div> -->
 
-        <p class="text-xs mt-6 text-center text-gray-500">Website by <a class="text-blue-500 underline" href="https://dellaport.dev" target="_blank">Dellaport.dev</a>, a local member.</p> 
+        <p class="text-xs mt-6 text-center text-gray-500">Website by <a class="text-blue-500 underline" href="https://dellaport.dev" target="_blank">Dellaport.dev</a>, a local Lions Club member.</p> 
     </div>
 </body>
 </html>
