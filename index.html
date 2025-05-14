@@ -58,21 +58,46 @@
 
             const updateMeetingDate = () => {
                 const now = new Date();
-                const currentYear = now.getFullYear();
-                
-                const nextMeetingStr = secondAndFourthTuesdays2025.find(dateStr => {
-                    const [month, day] = dateStr.split("-").map(Number);
-                    const meetingDate = new Date(currentYear, month - 1, day);
-                    return meetingDate > now;
+
+                const pacificParts = new Intl.DateTimeFormat('en-US', {
+                    timeZone: 'America/Los_Angeles',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    hour12: false
+                })
+                .formatToParts(now)
+                .reduce((acc, p) => {
+                    if (p.type !== 'literal') acc[p.type] = parseInt(p.value, 10);
+                    return acc;
+                }, {});
+
+                const { year: yr, month: mo, day: dy, hour: hr } = pacificParts;
+                const todayKey = `${String(mo).padStart(2, '0')}-${String(dy).padStart(2, '0')}`;
+                const todayNumber = mo * 100 + dy;
+
+                const nextMeetingStr = secondAndFourthTuesdays2025.find(ds => {
+                    const [m, d] = ds.split('-').map(Number);
+                    const meetingNumber = m * 100 + d;
+
+                    if (ds === todayKey) {
+                        return hr < 19;
+                    }
+
+                    return meetingNumber > todayNumber;
                 });
 
                 if (!nextMeetingStr) return;
 
-                const [month, day] = nextMeetingStr.split("-").map(Number);
-                const monthNames = ["January", "February", "March", "April", "May", "June", 
-                                    "July", "August", "September", "October", "November", "December"];
+                const [nextMo, nextDy] = nextMeetingStr.split('-').map(Number);
+                const monthNames = [
+                    'January','February','March','April','May','June',
+                    'July','August','September','October','November','December'
+                ];
 
-                const nextMeetingText = `Next Meeting: Tuesday, ${monthNames[month - 1]} ${day}, 2025`;
+                const nextMeetingText =
+                    `Next Meeting: Tuesday, ${monthNames[nextMo - 1]} ${nextDy}, ${yr}`;
 
                 document.getElementById('next-meeting').innerText = nextMeetingText;
             };
