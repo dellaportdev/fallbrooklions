@@ -180,19 +180,44 @@
 
 		function renderNextMeetingDate() {
 			const now = new Date();
-			const year = now.getFullYear();
 
-			for (let d of dates) {
-				const [m, day] = d.split('-').map(Number);
-				const dt = new Date(year, m - 1, day);
+			const pacificParts = new Intl.DateTimeFormat('en-US', {
+				timeZone: 'America/Los_Angeles',
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				hour12: false
+			})
+			.formatToParts(now)
+			.reduce((acc, p) => {
+				if (p.type !== 'literal') acc[p.type] = parseInt(p.value, 10);
+				return acc;
+			}, {});
 
-				if (dt > now) {
-					const mn = dt.toLocaleString('default', { month: 'long' });
-					document.getElementById('next-meeting').innerHTML = `Next Meeting:<br>Tuesday, ${mn} ${day}, ${year}`;
-					break;
+			const { year: yr, month: mo, day: dy, hour: hr } = pacificParts;
+			const todayKey = `${String(mo).padStart(2, '0')}-${String(dy).padStart(2, '0')}`;
+			const todayNumber = mo * 100 + dy;
+
+			const nextMeetingStr = dates.find(ds => {
+				const [m, d] = ds.split('-').map(Number);
+				const meetingNumber = m * 100 + d;
+
+				if (ds === todayKey) {
+					return hr < 19;
 				}
-			}
+				return meetingNumber > todayNumber;
+			});
+
+			if (!nextMeetingStr) return;
+
+			const [nextMo, nextDy] = nextMeetingStr.split('-').map(Number);
+			const monthName = new Date(yr, nextMo - 1, 1).toLocaleString('default', { month: 'long' });
+
+			document.getElementById('next-meeting').innerHTML =
+				`Next Meeting:<br>Tuesday, ${monthName} ${nextDy}, ${yr}`;
 		}
+
 
 		function renderMinutes() {
 			const now = new Date();
@@ -202,7 +227,6 @@
 			minutesGrid.innerHTML = '';
 			const months = {};
 
-			// Set 'todayMidnight' to midnight at the start of tomorrow
 			const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
 			dates.forEach(d => {
