@@ -553,18 +553,18 @@
 				</div>
 			</div>
 
-			<div class="flex items-center mb-4 mt-6">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Minutes</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded">
+			
+			<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 mt-6 hover:bg-gray-100 rounded">
 				<span class="text-sm font-semibold">Click to see meeting minutes</span>
 				<i id="minutes-chevron" class="fa-solid fa-chevron-down transition-transform"></i>
 			</button>
-
+			
 			<div id="minutes-panel" class="max-h-0 overflow-hidden transition-[max-height] duration-300">
+				<div class="flex items-center mb-4 mt-6">
+					<hr class="border-gray-300 flex-grow">
+					<span class="mx-4 text-gray-500 uppercase text-sm">Minutes</span>
+					<hr class="border-gray-300 flex-grow">
+				</div>
 				<h3 class="text-lg font-bold mt-4">Meeting Minutes 2025</h3>
 				<div id="minutes-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-md mt-2"></div>
 				<p class="text-sm mt-4">If a meeting's minutes you need are not online yet, please contact <a onClick="mailTo('Alfonso Ramos')" href="#" class="text-blue-500 underline">Alfonso</a>.</p>
@@ -577,7 +577,7 @@
 			<div class="flex items-start mb-6">
 				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" 
 					alt="Lions International Logo" 
-					class="h-64 w-auto mr-6 flex-shrink-0" />
+					class="h-64 w-auto mr-6 flex-shrink-0 hidden md:block" />
 
 				<div>
 					<p>For over 100 years, Lions have served their local communities as a service organization. Local clubs can
