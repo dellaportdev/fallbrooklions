@@ -78,11 +78,11 @@
 	<script defer>
 		const memberPhotoPath = './images/members/';
 		const members = [
-			{ name: 'Alfonso Ramos', 	role: 'President', 				image: 'alfonso.png' },
+			{ name: 'Alfonso Ramos', 	role: 'President', 				image: 'alfonso.png', 	email:'fallbrooklions@gmail.com'},
 			{ name: 'Gus Romero', 		role: 'First Vice President', 	image: 'gus.png' },
 			{ name: 'Sharon Zornes', 	role: 'Treasurer', 				image: 'sharon.png' },
 			{ name: 'Karina Young', 	role: 'Secretary', 				image: 'karina.png' },
-			{ name: 'Val Fujihara', 	role: 'Membership Chairperson', image: 'val.png' },
+			{ name: 'Val Fujihara', 	role: 'Membership Chairperson', image: 'val.png', 		email:'valjk@att.net' },
 			{ name: 'Lorene Morris', 	role: 'Service Chairperson', 	image: 'lorene.png' },
 		];
 
@@ -218,7 +218,6 @@
 				`Next Meeting:<br>Tuesday, ${monthName} ${nextDy}, ${yr}`;
 		}
 
-
 		function renderMinutes() {
 			const now = new Date();
 			const year = now.getFullYear();
@@ -257,7 +256,6 @@
 					a.href = fileName;
 					a.target = '_blank';
 
-					// Link is active ONLY if the date is in the past (not today or future)
 					if (dt < todayMidnight) {
 						a.className = 'flex items-center space-x-2 whitespace-nowrap text-blue-500 hover:underline';
 					} else {
@@ -276,7 +274,6 @@
 					li.appendChild(a);
 					ul.appendChild(li);
 
-					// Only check for file existence if the meeting date is strictly in the past
 					if (dt < todayMidnight) {
 						fetch(fileName, { method: 'HEAD' })
 							.then(response => {
@@ -298,7 +295,6 @@
 			});
 		}
 
-
 		function initSwiper() {
 			new Swiper('.swiper-container', {
 				loop: true,
@@ -308,12 +304,40 @@
 			});
 		}
 
+		function mailTo(name){
+			const member = members.find(m => m.name === name);
+			if (member && member.email) {
+				window.location.href = "mailto:" + member.email;
+			} else {
+				alert("We don't have an email on file for " + name + " at the time.");
+			}
+		}
+
 		document.addEventListener('DOMContentLoaded', () => {
 			renderNextMeetingDate();
-			renderMinutes();
+			renderMembers();
 			renderPhotos();
 			initSwiper();
-			renderMembers();
+
+			let minutesLoaded = false;
+			const toggle = document.getElementById('minutes-toggle');
+			const panel = document.getElementById('minutes-panel');
+			const chevron = document.getElementById('minutes-chevron');
+
+			toggle.addEventListener('click', function () {
+				const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+				if (isOpen) {
+					panel.style.maxHeight = '0px';
+					chevron.style.transform = 'rotate(0deg)';
+				} else {
+					if (!minutesLoaded && typeof renderMinutes === 'function') {
+						renderMinutes();
+						minutesLoaded = true;
+					}
+					panel.style.maxHeight = panel.scrollHeight + 'px';
+					chevron.style.transform = 'rotate(180deg)';
+				}
+			});
 
 			document.querySelectorAll("img").forEach(function (img) {
 				img.addEventListener("error", function () {
@@ -345,6 +369,49 @@
 	</nav>
 
 	<main id="main" class="pt-28 pb-12 text-gray-700" role="main" tabindex="-1">
+	<!-- <section id="news" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Fallbrook Ranch Lions Club News"> 
+			<div class="flex items-center mb-4">
+				<hr class="border-gray-300 flex-grow">
+				<span class="mx-4 text-gray-500 uppercase text-sm">Club News</span>
+				<hr class="border-gray-300 flex-grow">
+			</div>
+
+			<h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6 text-center">
+				Charter Night
+				<span class="block text-sm font-medium text-slate-600 tracking-wide">Celebrate the official formation of the Fallbrook Ranch Lions Club.<br> Dinner & ceremony to follow.</span>
+			</h3>
+			
+			<ul class="space-y-4">
+				<li class="flex items-start gap-3">
+					<i class="fa-solid fa-calendar-days text-xl shrink-0"></i>
+					<p><span class="font-semibold">Date:</span> Sunday, August 17th</p>
+				</li>
+				<li class="flex items-start gap-3">
+					<i class="fa-solid fa-clock text-xl shrink-0"></i>
+					<p><span class="font-semibold">Time:</span> 5:00&nbsp;PM – 8:00&nbsp;PM</p>
+				</li>
+				<li class="flex items-start gap-3">
+					<i class="fa-solid fa-location-dot text-xl shrink-0"></i>
+					<p><span class="font-semibold">Location:</span> 127 West Social House, 127 West Elder St, Fallbrook</p>
+				</li>
+			</ul>
+			
+			<div class="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-2 text-sm">
+				<a href="https://square.link/u/hHGdoNWc" target="_blank" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 ring-1 ring-slate-300 text-slate-800 font-medium py-2 px-3 transition shadow-sm sm:flex-1">
+					<i class="fa-solid fa-ticket"></i>
+					Purchase Tickets Online
+				</a>
+				<a href="https://maps.app.goo.gl/p4UkAAsDVpZyYFyy5" target="_blank" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 ring-1 ring-slate-300 text-slate-800 font-medium py-2 px-3 transition shadow-sm sm:flex-1">
+					<i class="fa-solid fa-map-location-dot"></i>
+					Google Maps
+				</a>
+				<a href="./files/Fallbrook Lions Club Charter Night Invite.pdf" target="_blank" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 ring-1 ring-slate-300 text-slate-800 font-medium py-2 px-3 transition shadow-sm sm:flex-1">
+					<i class="fa-solid fa-file-arrow-down"></i>
+					Download Flyer
+				</a>
+			  </div>
+		</section> -->
+
 		<section id="about" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="About the Fallbrook Ranch Lions Club">
 			<div class="flex items-center mb-4">
 				<hr class="border-gray-300 flex-grow">
@@ -400,7 +467,7 @@
 				click the button below to get in touch with our Membership Chairperson, Val Fujihara.
 			</p>
 			
-			<a href="mailto:valjk@att.net"
+			<a onClick="mailTo('Val Fujihara')" href="#"
 				class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto mr-3">
 				<i class="fa-solid fa-envelope mr-2"></i>
 				Contact Val Fujihara
@@ -422,7 +489,7 @@
 			
 			<p class="">Fallbrook Ranch Lions Club can take your used eyeglasses. One of the Lions Clubs' global causes is
 				vision. Donated eyeglasses are first sorted and refurbished, then given free to patients that receive
-				vision screenings around the county until a comprehensive eye exam and eye wear are obtained. We have 2
+				vision screenings around the county until a comprehensive eye exam and eye wear are obtained. We have the following
 				locations in town where glasses can be dropped off in our donation boxes:</p>
 
 			<ul class="mt-4 space-y-2">
@@ -472,9 +539,11 @@
 					<p class="font-semibold text-gray-800">Community Health &amp; Wellness Center</p>
 					<p class="">1636 E. Mission Rd.<br>Fallbrook, CA 92028</p>
 					<p class="text-xs text-gray-500">Room number may change; check posted signs at the entrance.</p>
-					<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center text-blue-500 hover:underline mt-2">
-						<i class="fa-solid fa-map-marker-alt mr-2"></i>View Directions
+					<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded shadow mt-2">
+						<i class="fa-solid fa-map-marker-alt mr-2"></i>
+						View Directions
 					</a>
+
 				</div>
 				<div class="rounded-lg overflow-hidden shadow">
 					<iframe
@@ -489,33 +558,48 @@
 				<span class="mx-4 text-gray-500 uppercase text-sm">Minutes</span>
 				<hr class="border-gray-300 flex-grow">
 			</div>
-			
-			<h3 class="text-lg font-bold">Meeting Minutes 2025</h3>
-			
-			<div id="minutes-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-md mt-2"></div>
-			<p class="text-sm mt-4">If the minutes are not online within 48 hours of a meeting's date, contact <a href="mailto:fallbrooklions@gmail.com" class="text-blue-500 underline">Alfonso</a>.</p>
+
+			<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded">
+				<span class="text-sm font-semibold">Click to see meeting minutes</span>
+				<i id="minutes-chevron" class="fa-solid fa-chevron-down transition-transform"></i>
+			</button>
+
+			<div id="minutes-panel" class="max-h-0 overflow-hidden transition-[max-height] duration-300">
+				<h3 class="text-lg font-bold mt-4">Meeting Minutes 2025</h3>
+				<div id="minutes-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-md mt-2"></div>
+				<p class="text-sm mt-4">If a meeting's minutes you need are not online yet, please contact <a onClick="mailTo('Alfonso Ramos')" href="#" class="text-blue-500 underline">Alfonso</a>.</p>
+			</div>
 		</section>
 
-		<section id="lci" class="max-w-3xl mx-auto bg-white px-8 pt-4 pb-6 md:rounded-lg shadow-md" arial-label="More information about Lions International">
+		<section id="lci" class="max-w-3xl mx-auto bg-white px-8 pt-4 pb-6 md:rounded-lg shadow-md" aria-label="More information about Lions International">
 			<h2 class="text-3xl font-bold mb-4">Lions International</h2>
 
-			<p>For over 100 years, Lions have served their local communities as a service organization. Local clubs can
-				find a variety of service projects that benefit their communities and also use the Lions' eight global
-				causes to guide them:</p>
+			<div class="flex items-start mb-6">
+				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" 
+					alt="Lions International Logo" 
+					class="h-64 w-auto mr-6 flex-shrink-0" />
 
-			<ul class="grid grid-cols-1 md:grid-cols-2 list-disc pl-6 mt-4 mb-4 gap-y-2">
-				<li>Childhood cancer</li>
-				<li>Diabetes</li>
-				<li>Disaster relief</li>
-				<li>Environment</li>
-				<li>Humanitarian</li>
-				<li>Hunger</li>
-				<li>Vision</li>
-				<li>Youth</li>
-			</ul>
+				<div>
+					<p>For over 100 years, Lions have served their local communities as a service organization. Local clubs can
+						find a variety of service projects that benefit their communities and also use the Lions' eight global
+						causes to guide them:</p>
 
+					<ul class="grid grid-cols-1 md:grid-cols-2 list-disc pl-6 mt-4 mb-4 gap-y-2">
+						<li>Childhood cancer</li>
+						<li>Diabetes</li>
+						<li>Disaster relief</li>
+						<li>Environment</li>
+						<li>Humanitarian</li>
+						<li>Hunger</li>
+						<li>Vision</li>
+						<li>Youth</li>
+					</ul>
+
+				</div>
+			</div>
 			<p class="mt-4">
-				To learn more about Lions International, visit <a href="https://lionsclubs.org" target="_blank" class="text-blue-500 underline">lionsclubs.org</a>.
+				To learn more about Lions International, visit 
+				<a href="https://lionsclubs.org" target="_blank" class="text-blue-500 underline">lionsclubs.org</a>.
 			</p>
 
 			<div class="flex items-center mt-4 mb-4">
@@ -523,18 +607,18 @@
 				<span class="mx-4 text-gray-500 uppercase text-sm">Lions International Portal</span>
 				<hr class="border-gray-300 flex-grow">
 			</div>
+
 			<p class="mt-4">
 				Lions members, login into your Lion Portal here.
 			</p>
 				
 			<a href="https://lionsinternational.my.site.com/" target="_blank"
-				class="inline-flex items-center px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto">
+				class="inline-flex items-center px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded">
 				<i class="fa-solid fa-link mr-2"></i>
 				Access your Lion Portal
 			</a>
-
-
 		</section>
+
 	</main>
 
 	<footer class="bg-gray-100 py-6">
