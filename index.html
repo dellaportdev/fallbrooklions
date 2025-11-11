@@ -215,7 +215,7 @@
 			const monthName = new Date(yr, nextMo - 1, 1).toLocaleString('default', { month: 'long' });
 
 			document.getElementById('next-meeting').innerHTML =
-				`Next Meeting:<br>Tuesday, ${monthName} ${nextDy}, ${yr}`;
+				`Next Meeting:<br>Tuesday, ${monthName} ${nextDy}`;
 		}
 
 		function renderMinutes() {
@@ -344,6 +344,12 @@
 					this.style.display = "none";
 				});
 			});
+
+			document.querySelectorAll('[data-hideafter]').forEach(el => {
+				const hideAfter = new Date(el.getAttribute('data-hideafter'));
+				if (new Date() >= hideAfter) el.style.display = 'none';
+			});
+
 		});
 	</script>
 </head>
@@ -411,6 +417,62 @@
 				</a>
 			  </div>
 		</section> -->
+
+		<!-- <section id="calendar" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Club Calendar">
+		<div class="flex items-center mb-4">
+			<hr class="border-gray-300 flex-grow">
+			<span class="mx-4 text-gray-500 uppercase text-sm">Calendar</span>
+			<hr class="border-gray-300 flex-grow">
+		</div>
+
+		<div id="calendarWrap" class="mt-4 overflow-hidden transition-[max-height] duration-300 ease-out rounded-lg border border-gray-200 max-h-[180px]">
+			<iframe
+			id="calendarFrame"
+			class="w-full"
+			style="height:900px;"
+			src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=WEEK&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
+			data-week-src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=WEEK&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
+			data-month-src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=MONTH&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
+			loading="lazy"
+			title="Google Calendar">
+			</iframe>
+		</div>
+
+		<button id="toggleCal" type="button" class="mt-4 mx-auto block w-full sm:w-80 rounded-lg bg-blue-600 text-white px-5 py-3 text-sm font-medium shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-expanded="false">
+			Expand Full Calendar
+		</button>
+		</section> -->
+
+		<!-- <script>
+		var wrap=document.getElementById('calendarWrap');
+		var frame=document.getElementById('calendarFrame');
+		var btn=document.getElementById('toggleCal');
+		var open=false;
+		var mode='WEEK';
+		function setState(){
+			if(open){
+			wrap.style.maxHeight='900px';
+			if(mode!=='MONTH'){frame.src=frame.getAttribute('data-month-src');mode='MONTH';}
+			btn.textContent='Collapse';
+			btn.setAttribute('aria-expanded','true');
+			}else{
+			wrap.style.maxHeight='280px';
+			if(mode!=='WEEK'){frame.src=frame.getAttribute('data-week-src');mode='WEEK';}
+			btn.textContent='Expand Full Calendar';
+			btn.setAttribute('aria-expanded','false');
+			}
+		}
+		setState();
+		btn.addEventListener('click',function(){open=!open;setState();});
+		</script> -->
+
+
+
+
+
+
+
+
 
 		<section id="about" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="About the Fallbrook Ranch Lions Club">
 			<div class="flex items-center mb-4">
@@ -517,6 +579,12 @@
 			
 			<h3 class="text-2xl font-bold mb-4">Meeting Time &amp; Location</h3>
 			
+			<!-- Meeting Delay/Notice -->
+			<div id="meeting-alert" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md" role="alert" data-hideafter="2025-11-19T00:00:00">
+				<p class="font-bold">Notice</p>
+				<p>The Nov. 11th meeting has been rescheduled to Nov. 18th due to Veteran's Day.</p>
+			</div>
+
 			<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-4">
 				<div class="flex items-center justify-center space-x-2">
 					<i class="fa-solid fa-calendar-check text-blue-500"></i>
@@ -538,7 +606,7 @@
 				<div class="space-y-1">
 					<p class="font-semibold text-gray-800">Community Health &amp; Wellness Center</p>
 					<p class="">1636 E. Mission Rd.<br>Fallbrook, CA 92028</p>
-					<p class="text-xs text-gray-500">Room number may change; check posted signs at the entrance.</p>
+					<p class="text-xs text-gray-500 py-2">Room 4, but may change—check signs at the entrance.</p>
 					<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded shadow mt-2">
 						<i class="fa-solid fa-map-marker-alt mr-2"></i>
 						View Directions
