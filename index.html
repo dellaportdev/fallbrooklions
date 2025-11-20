@@ -56,7 +56,7 @@
 		}
 
 		h1 {
-			text-shadow:2px 1px 0px #333;
+			text-shadow: 2px 1px 0px #333;
 		}
 
 		h2,
@@ -67,14 +67,15 @@
 		nav {
 			background-color: #005299;
 			color: #fccc02;
-			text-shadow:1px 1px 0px #333;
+			text-shadow: 1px 1px 0px #333;
 		}
 
 		nav a:hover {
-			color:#fff;
+			color: #fff;
 		}
 	</style>
 
+	<!-- Site Data -->
 	<script defer>
 		const memberPhotoPath = './images/members/';
 		const members = [
@@ -98,261 +99,31 @@
 			{ file: 'avocadofestival.jpg', 	caption: 'Fallbrook Lions at the Avocado Festival' },
 		];
 
-		const dates = [
-			"01-14", "01-28", "02-11", "02-25", "03-11", "03-25", "04-08", "04-22",
-			"05-13", "05-27", "06-10", "06-24", "07-08", "07-22", "08-12", "08-26",
-			"09-09", "09-23", "10-14", "10-28", "11-11", "11-25", "12-09", "12-23"
-		];
+		const minutesPathTemplate = '/minutes/{D}-{YY} Fallbrook Ranch Lions Club meeting minutes.pdf';
 
-		function renderMembers() {
-			const container = document.getElementById('members');
-			container.innerHTML = '';
-
-			members.forEach(({ name, role, image }) => {
-				const avatarWrapper = document.createElement('div');
-				avatarWrapper.className = 'h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-400';
-
-				if (image) {
-					const img = document.createElement('img');
-					img.src = memberPhotoPath + image;
-					img.alt = name + ', ' + role;
-					img.className = 'h-12 w-12 rounded-full object-cover border-2 border-gray';
-
-					avatarWrapper.appendChild(img);
-				} else {
-					const icon = document.createElement('i');
-					icon.className = 'fa-solid fa-user';
-
-					avatarWrapper.appendChild(icon);
-				}
-
-				const nameEl = document.createElement('p');
-				nameEl.className = 'font-semibold text-gray-800';
-				nameEl.innerText = name;
-				
-				const roleEl = document.createElement('p');
-				roleEl.className = 'text-gray-500 text-sm';
-				roleEl.innerText = role;
-				
-				const info = document.createElement('div');
-				info.appendChild(nameEl);
-				info.appendChild(roleEl);
-
-				const card = document.createElement('div');
-				card.className = 'flex items-center space-x-4';				
-				card.appendChild(avatarWrapper);
-				card.appendChild(info);
-
-				container.appendChild(card);
-			});
-		}
-
-		function renderPhotos() {
-			const container = document.getElementById('activity-photos');
-			container.innerHTML = '';
-
-			photos.forEach(({ file, caption }) => {
-				const a = document.createElement('a');
-				a.href = photoPath + file;
-				a.target = '_blank';
-				a.className = 'block';
-
-				const img = document.createElement('img');
-				img.src = photoPath + file;
-				img.alt = caption;
-				img.className = 'mx-auto max-h-64 shadow-lg border-2';
-
-				a.appendChild(img);
-
-				const figcap = document.createElement('p');
-				figcap.className = 'text-center text-sm mt-2 text-gray-700';
-				figcap.innerText = caption;
-
-				a.appendChild(figcap);
-
-				const slide = document.createElement('div');
-				slide.className = 'swiper-slide';
-				slide.appendChild(a);
-
-				container.appendChild(slide);
-			});
-		}
-
-		function renderNextMeetingDate() {
-			const now = new Date();
-
-			const pacificParts = new Intl.DateTimeFormat('en-US', {
-				timeZone: 'America/Los_Angeles',
-				year: 'numeric',
-				month: '2-digit',
-				day: '2-digit',
-				hour: '2-digit',
-				hour12: false
-			})
-			.formatToParts(now)
-			.reduce((acc, p) => {
-				if (p.type !== 'literal') acc[p.type] = parseInt(p.value, 10);
-				return acc;
-			}, {});
-
-			const { year: yr, month: mo, day: dy, hour: hr } = pacificParts;
-			const todayKey = `${String(mo).padStart(2, '0')}-${String(dy).padStart(2, '0')}`;
-			const todayNumber = mo * 100 + dy;
-
-			const nextMeetingStr = dates.find(ds => {
-				const [m, d] = ds.split('-').map(Number);
-				const meetingNumber = m * 100 + d;
-
-				if (ds === todayKey) {
-					return hr < 19;
-				}
-				return meetingNumber > todayNumber;
-			});
-
-			if (!nextMeetingStr) return;
-
-			const [nextMo, nextDy] = nextMeetingStr.split('-').map(Number);
-			const monthName = new Date(yr, nextMo - 1, 1).toLocaleString('default', { month: 'long' });
-
-			document.getElementById('next-meeting').innerHTML =
-				`Next Meeting:<br>Tuesday, ${monthName} ${nextDy}`;
-		}
-
-		function renderMinutes() {
-			const now = new Date();
-			const year = now.getFullYear();
-			const year2 = year.toString().slice(2);
-			const minutesGrid = document.getElementById('minutes-grid');
-			minutesGrid.innerHTML = '';
-			const months = {};
-
-			const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-			dates.forEach(d => {
-				const [m, day] = d.split('-').map(Number);
-				const dt = new Date(year, m - 1, day);
-
-				const monthName = dt.toLocaleString('default', { month: 'long' });
-				if (!months[monthName]) months[monthName] = [];
-
-				months[monthName].push({ d, day, dt });
-			});
-
-			Object.keys(months).forEach(monthName => {
-				const monthDiv = document.createElement('div');
-
-				const h4 = document.createElement('h4');
-				h4.className = 'text-sm uppercase text-gray-500 mb-2';
-				h4.innerText = monthName;
-				
-				monthDiv.appendChild(h4);
-
-				const ul = document.createElement('ul');
-				ul.className = 'space-y-2';
-
-				months[monthName].forEach(({ d, day, dt }) => {
-					const a = document.createElement('a');
-					const fileName = `/minutes/${d}-${year2} Fallbrook Ranch Lions Club meeting minutes.pdf`;
-					a.href = fileName;
-					a.target = '_blank';
-
-					if (dt < todayMidnight) {
-						a.className = 'flex items-center space-x-2 whitespace-nowrap text-blue-500 hover:underline';
-					} else {
-						a.className = 'flex items-center space-x-2 whitespace-nowrap text-gray-400 pointer-events-none';
-					}
-
-					const icon = document.createElement('i');
-					icon.className = 'fa-solid fa-file-pdf';
-					a.appendChild(icon);
-
-					const span = document.createElement('span');
-					span.innerText = `${monthName} ${day}`;
-					a.appendChild(span);
-
-					const li = document.createElement('li');
-					li.appendChild(a);
-					ul.appendChild(li);
-
-					if (dt < todayMidnight) {
-						fetch(fileName, { method: 'HEAD' })
-							.then(response => {
-								if (!response.ok) {
-									a.classList.remove('text-blue-500', 'hover:underline');
-									a.classList.add('text-gray-400', 'pointer-events-none');
-									a.removeAttribute('href');
-								}
-							})
-							.catch(() => {
-								a.classList.remove('text-blue-500', 'hover:underline');
-								a.classList.add('text-gray-400', 'pointer-events-none');
-								a.removeAttribute('href');
-							});
-					}
-				});
-				monthDiv.appendChild(ul);
-				minutesGrid.appendChild(monthDiv);
-			});
-		}
-
-		function initSwiper() {
-			new Swiper('.swiper-container', {
-				loop: true,
-				autoplay: { delay: 5000, disableOnInteraction: false },
-				pagination: { el: '.swiper-pagination', clickable: true },
-				navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-			});
-		}
-
-		function mailTo(name){
-			const member = members.find(m => m.name === name);
-			if (member && member.email) {
-				window.location.href = "mailto:" + member.email;
-			} else {
-				alert("We don't have an email on file for " + name + " at the time.");
+		const meetingNotices = [
+			{
+				text: 'Happy Holidays! No more meetings for 2025.',
+				start: null,
+				end: '2026-01-01T00:00:00'
 			}
-		}
+		]
 
-		document.addEventListener('DOMContentLoaded', () => {
-			renderNextMeetingDate();
-			renderMembers();
-			renderPhotos();
-			initSwiper();
-
-			let minutesLoaded = false;
-			const toggle = document.getElementById('minutes-toggle');
-			const panel = document.getElementById('minutes-panel');
-			const chevron = document.getElementById('minutes-chevron');
-
-			toggle.addEventListener('click', function () {
-				const isOpen = panel.style.maxHeight && panel.style.maxHeight !== '0px';
-				if (isOpen) {
-					panel.style.maxHeight = '0px';
-					chevron.style.transform = 'rotate(0deg)';
-				} else {
-					if (!minutesLoaded && typeof renderMinutes === 'function') {
-						renderMinutes();
-						minutesLoaded = true;
-					}
-					panel.style.maxHeight = panel.scrollHeight + 'px';
-					chevron.style.transform = 'rotate(180deg)';
-				}
-			});
-
-			document.querySelectorAll("img").forEach(function (img) {
-				img.addEventListener("error", function () {
-					this.style.display = "none";
-				});
-			});
-
-			document.querySelectorAll('[data-hideafter]').forEach(el => {
-				const hideAfter = new Date(el.getAttribute('data-hideafter'));
-				if (new Date() >= hideAfter) el.style.display = 'none';
-			});
-
-		});
+		const datesByYear = {
+			2025: [
+				"02-25", "03-11", "03-25", "04-08", "04-22",
+				"05-13", "05-27", "06-10", "06-24", "07-08", "07-22", "08-12", "08-26",
+				"09-09", "09-23", "10-14", "10-28", "11-18"
+			],
+			2026: [
+				"01-13", "01-27", "02-10", "02-24"
+			]
+		};
 	</script>
+
+	<script src="./scripts.js" defer></script>
 </head>
+
 <body class="bg-gray-100" id="top">
 	<a href="#main" class="sr-only focus:not-sr-only">Skip to main content</a>
 
@@ -369,13 +140,14 @@
 				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#about" class="hover:underline">About Us</a></li>
 				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#volunteer" class="hover:underline">Volunteer</a></li>
 				<li class="py-1 px-3 sm:pr-4 sm:px-1 md:col-start-1"><a href="#meetings" class="hover:underline">Meetings</a></li>
-				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#lci" class="hover:underline">Lions International</a></li>
+				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#lci" class="hover:underline">Lions International</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
 
 	<main id="main" class="pt-28 pb-12 text-gray-700" role="main" tabindex="-1">
-	<!-- <section id="news" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Fallbrook Ranch Lions Club News"> 
+		<!-- <section id="news" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Fallbrook Ranch Lions Club News"> 
 			<div class="flex items-center mb-4">
 				<hr class="border-gray-300 flex-grow">
 				<span class="mx-4 text-gray-500 uppercase text-sm">Club News</span>
@@ -427,9 +199,7 @@
 
 		<div id="calendarWrap" class="mt-4 overflow-hidden transition-[max-height] duration-300 ease-out rounded-lg border border-gray-200 max-h-[180px]">
 			<iframe
-			id="calendarFrame"
-			class="w-full"
-			style="height:900px;"
+			id="calendarFrame" class="w-full" style="height:900px;"
 			src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=WEEK&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
 			data-week-src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=WEEK&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
 			data-month-src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=MONTH&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
@@ -481,14 +251,9 @@
 				<hr class="border-gray-300 flex-grow">
 			</div>
 
-			<p class="">We are a newly chartered Lions Club in Fallbrook, CA, part of Lions International—a
-				global service organization dedicated to making our communities better. Whether you&rsquo;re a current member
-				or new visitor, you&rsquo;re welcome to learn more below.</p>
-
-			<p class="mt-4">
-				A Lions Club is a volunteer organization that brings people from your local community together to plan and run hands-on projects — like collecting used eyeglasses,
-				hosting food drives, or building community gardens.
-			</p>
+			<p class="">We are a newly chartered Lions Club in Fallbrook, CA, part of Lions International — a global service organization dedicated to making our communities better. Whether you&rsquo;re a current member or new visitor, you&rsquo;re welcome to learn more below.</p>
+			
+			<p class="mt-4">A Lions Club is a volunteer organization that brings people from your local community together to plan and run hands-on projects — like collecting used eyeglasses, hosting food drives, or building community gardens.</p>
 
 			<div class="flex items-center mb-4 mt-4">
 				<hr class="border-gray-300 flex-grow">
@@ -522,21 +287,15 @@
 			</div>
 
 			<h3 class="text-3xl font-bold my-4">Join Us.</h3>
-			
-			<p class="mb-4">
-				Do you want to make a difference right here in Fallbrook? Whether you&rsquo;re looking to volunteer at an event, lead
-				a service project, or simply learn more about what we do, we&rsquo;d love to have you. Stop by one of our meetings or
-				click the button below to get in touch with our Membership Chairperson, Val Fujihara.
-			</p>
-			
-			<a onClick="mailTo('Val Fujihara')" href="#"
-				class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto mr-3">
+
+			<p class="mb-4"> Do you want to make a difference right here in Fallbrook? Whether you&rsquo;re looking to volunteer at an event, lead a service project, or simply learn more about what we do, we&rsquo;d love to have you. Stop by one of our meetings or click the button below to get in touch with our Membership Chairperson, Val Fujihara.</p>
+
+			<a onClick="mailTo('Val Fujihara')" href="#" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto mr-3">
 				<i class="fa-solid fa-envelope mr-2"></i>
 				Contact Val Fujihara
 			</a>
 
-			<a href="#meetings"
-				class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto">
+			<a href="#meetings" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto">
 				<i class="fa-solid fa-calendar-days mr-2"></i>
 				Meeting Information
 			</a>
@@ -548,24 +307,24 @@
 			</div>
 
 			<h3 class="text-2xl font-bold mt-7 mb-4">Donate Your Used Eyeglasses</h3>
-			
-			<p class="">Fallbrook Ranch Lions Club can take your used eyeglasses. One of the Lions Clubs' global causes is
-				vision. Donated eyeglasses are first sorted and refurbished, then given free to patients that receive
-				vision screenings around the county until a comprehensive eye exam and eye wear are obtained. We have the following
-				locations in town where glasses can be dropped off in our donation boxes:</p>
+
+			<p class="">Fallbrook Ranch Lions Club can take your used eyeglasses. One of the Lions Clubs' global causes is vision. Donated eyeglasses are first sorted and refurbished, then given free to patients that receive vision screenings around the county until a comprehensive eye exam and eye wear are obtained. We have the following locations in town where glasses can be dropped off in our donation boxes:</p>
 
 			<ul class="mt-4 space-y-2">
 				<li>
-					<strong>Major Market</strong> - 
-					<a href="https://maps.app.goo.gl/4CL1fu9BAEUeZvp2A" class="text-blue-500" target="_blank">845 S. Main Ave. Fallbrook</a>
+					<strong>Major Market</strong> -
+					<a href="https://maps.app.goo.gl/4CL1fu9BAEUeZvp2A" class="text-blue-500" target="_blank">845 S.
+						Main Ave. Fallbrook</a>
 				</li>
 				<li>
-					<strong>Fallbrook Community Center</strong> - 
-					<a href="https://maps.app.goo.gl/C6dwb64iNjNPB2si7" class="text-blue-500" target="_blank">341 Heald Ln. Fallbrook</a>
+					<strong>Fallbrook Community Center</strong> -
+					<a href="https://maps.app.goo.gl/C6dwb64iNjNPB2si7" class="text-blue-500" target="_blank">341 Heald
+						Ln. Fallbrook</a>
 				</li>
 				<li>
-					<strong>Community Health & Wellness Center</strong> - 
-					<a href="https://maps.app.goo.gl/kfxLbUSMyRGHMvMB9" class="text-blue-500" target="_blank">1636 E. Mission Rd. Fallbrook</a>
+					<strong>Community Health & Wellness Center</strong> -
+					<a href="https://maps.app.goo.gl/kfxLbUSMyRGHMvMB9" class="text-blue-500" target="_blank">1636 E.
+						Mission Rd. Fallbrook</a>
 				</li>
 			</ul>
 		</section>
@@ -576,14 +335,11 @@
 				<span class="mx-4 text-gray-500 uppercase text-sm">Meetings</span>
 				<hr class="border-gray-300 flex-grow">
 			</div>
-			
+
 			<h3 class="text-2xl font-bold mb-4">Meeting Time &amp; Location</h3>
-			
+
 			<!-- Meeting Delay/Notice -->
-			<div id="meeting-alert" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md" role="alert" data-hideafter="2025-11-19T00:00:00">
-				<p class="font-bold">Notice</p>
-				<p>The Nov. 11th meeting has been rescheduled to Nov. 18th due to Veteran's Day.</p>
-			</div>
+			<div id="meeting-notices"></div>
 
 			<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-4">
 				<div class="flex items-center justify-center space-x-2">
@@ -615,27 +371,30 @@
 				</div>
 				<div class="rounded-lg overflow-hidden shadow">
 					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3331.3150181608535!2d-117.23156488789806!3d33.38894475235047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc7f760613f4ff%3A0x7d20d9992c2e1137!2sFRHD%20-%20Community%20Health%20%26%20Wellness%20Center!5e0!3m2!1sen!2sus!4v1732656737611!5m2!1sen!2sus"
-						class="w-full h-48 md:h-40" allowfullscreen loading="lazy">
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3331.3150181608535!2d-117.23156488789806!3d33.38894475235047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc7f760613f4ff%3A0x7d20d9992c2e1137!2sFRHD%20-%20Community%20Health%20%26%20Wellness%20Center!5e0!3m2!1sen!2sus!4v1732656737611!5m2!1sen!2sus" class="w-full h-48 md:h-40" allowfullscreen loading="lazy">
 					</iframe>
 				</div>
 			</div>
 
-			
 			<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 mt-6 hover:bg-gray-100 rounded">
 				<span class="text-sm font-semibold">Click to see meeting minutes</span>
 				<i id="minutes-chevron" class="fa-solid fa-chevron-down transition-transform"></i>
 			</button>
-			
+
 			<div id="minutes-panel" class="max-h-0 overflow-hidden transition-[max-height] duration-300">
 				<div class="flex items-center mb-4 mt-6">
 					<hr class="border-gray-300 flex-grow">
 					<span class="mx-4 text-gray-500 uppercase text-sm">Minutes</span>
 					<hr class="border-gray-300 flex-grow">
 				</div>
-				<h3 class="text-lg font-bold mt-4">Meeting Minutes 2025</h3>
-				<div id="minutes-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-md mt-2"></div>
-				<p class="text-sm mt-4">If a meeting's minutes you need are not online yet, please contact <a onClick="mailTo('Alfonso Ramos')" href="#" class="text-blue-500 underline">Alfonso</a>.</p>
+
+				<div id="minutes-tabs" class="flex gap-2 border-b border-gray-200 mb-4"></div>
+				<div id="minutes-panels"></div>
+
+				<p class="text-sm mt-4">
+					If a meeting's minutes you need are not online yet, please contact
+					<a onClick="mailTo('Alfonso Ramos')" href="#" class="text-blue-500 underline">Alfonso</a>.
+				</p>
 			</div>
 		</section>
 
@@ -643,14 +402,10 @@
 			<h2 class="text-3xl font-bold mb-4">Lions International</h2>
 
 			<div class="flex items-start mb-6">
-				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" 
-					alt="Lions International Logo" 
-					class="h-64 w-auto mr-6 flex-shrink-0 hidden md:block" />
+				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-64 w-auto mr-6 flex-shrink-0 hidden md:block" />
 
 				<div>
-					<p>For over 100 years, Lions have served their local communities as a service organization. Local clubs can
-						find a variety of service projects that benefit their communities and also use the Lions' eight global
-						causes to guide them:</p>
+					<p>For over 100 years, Lions have served their local communities as a service organization. Local clubs can find a variety of service projects that benefit their communities and also use the Lions' eight global causes to guide them:</p>
 
 					<ul class="grid grid-cols-1 md:grid-cols-2 list-disc pl-6 mt-4 mb-4 gap-y-2">
 						<li>Childhood cancer</li>
@@ -665,10 +420,7 @@
 
 				</div>
 			</div>
-			<p class="mt-4">
-				To learn more about Lions International, visit 
-				<a href="https://lionsclubs.org" target="_blank" class="text-blue-500 underline">lionsclubs.org</a>.
-			</p>
+			<p class="mt-4">To learn more about Lions International, visit <a href="https://lionsclubs.org" target="_blank" class="text-blue-500 underline">lionsclubs.org</a>.</p>
 
 			<div class="flex items-center mt-4 mb-4">
 				<hr class="border-gray-300 flex-grow">
@@ -676,12 +428,9 @@
 				<hr class="border-gray-300 flex-grow">
 			</div>
 
-			<p class="mt-4">
-				Lions members, login into your Lion Portal here.
-			</p>
-				
-			<a href="https://lionsinternational.my.site.com/" target="_blank"
-				class="inline-flex items-center px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded">
+			<p class="mt-4">Lions members, login into your Lion Portal here.</p>
+
+			<a href="https://lionsinternational.my.site.com/" target="_blank" class="inline-flex items-center px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded">
 				<i class="fa-solid fa-link mr-2"></i>
 				Access your Lion Portal
 			</a>
@@ -695,4 +444,5 @@
 		</p>
 	</footer>
 </body>
+
 </html>
