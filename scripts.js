@@ -366,7 +366,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initMinutesSystem();
     renderMeetingNotices();
 
-
     document.querySelectorAll('img').forEach(function (img) {
         img.addEventListener('error', function () {
             this.style.display = 'none';
