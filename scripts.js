@@ -26,7 +26,13 @@ function renderMembers() {
 
         const roleEl = document.createElement('p');
         roleEl.className = 'text-gray-500 text-sm';
-        roleEl.innerText = role;
+
+        if (role && role.indexOf(',') !== -1) {
+            roleEl.innerHTML = role.split(',').map(r => r.trim()).join('<br>');
+        } else {
+            roleEl.innerText = role;
+        }
+
 
         const info = document.createElement('div');
         info.appendChild(nameEl);
