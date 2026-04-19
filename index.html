@@ -93,7 +93,6 @@
 
 	<script src="./data.js" defer></script>
 	<script src="./scripts.js" defer></script>
-	<!-- Patch upcoming 2026 dates. Move these into data.js once confirmed. -->
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
 			if (typeof datesByYear !== 'undefined') {
@@ -133,7 +132,7 @@
 		</div>
 	</nav>
 
-	<main id="main" class="pt-32 md:pt-24 pb-16" role="main" tabindex="-1">
+	<main id="main" class="pt-32 md:pt-20 pb-8" role="main" tabindex="-1">
 		<div class="max-w-4xl mx-auto px-4 space-y-8">
 
 			<!-- Dynamic announcements -->
@@ -147,12 +146,12 @@
 				<div class="relative z-10">
 					<p class="text-xs font-bold uppercase tracking-widest text-white mb-2">Fallbrook, California &middot; Est. 2025</p>
 					<h1 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-3">Serving Our Community<br>Through Action</h1>
-					<p class="text-blue-200 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">We are a newly chartered Lions Club &mdash; a volunteer organization that brings neighbors together to make Fallbrook a better place.</p>
+					<p class="text-blue-200 text-md leading-relaxed max-w-sm mx-auto md:mx-0">We are the Fallbrook Ranch Lions Club &mdash; a volunteer organization that brings neighbors together to make Fallbrook a better place.</p>
 					<div class="flex flex-wrap justify-center md:justify-start gap-3 mt-6">
-						<a href="#volunteer" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold text-sm px-4 py-2 rounded transition-colors">
+						<a href="#volunteer" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold text-md px-4 py-2 rounded transition-colors">
 							<i class="fa-solid fa-hand-holding-heart"></i> Get Involved
 						</a>
-						<a href="#meetings" class="btn-ghost inline-flex items-center gap-2 bg-transparent text-sm font-semibold px-4 py-2 rounded transition-colors">
+						<a href="#meetings" class="btn-ghost inline-flex items-center gap-2 bg-transparent text-md font-semibold px-4 py-2 rounded transition-colors">
 							<i class="fa-solid fa-calendar-days"></i> Upcoming Meetings
 						</a>
 					</div>
@@ -164,8 +163,8 @@
 				<div class="divider mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">About Us</span></div>
 
 				<h2 class="text-2xl font-bold text-navy mb-3">Who We Are</h2>
-				<p class="text-sm leading-relaxed text-gray-600 mb-3">We are a newly chartered Lions Club in Fallbrook, CA, part of Lions International &mdash; a global service organization dedicated to making our communities better. Whether you&rsquo;re a current member or new visitor, you&rsquo;re welcome to learn more below.</p>
-				<p class="text-sm leading-relaxed text-gray-600">A Lions Club is a volunteer organization that brings people from your local community together to plan and run hands-on projects &mdash; like collecting used eyeglasses, hosting food drives, or building community gardens.</p>
+				<p class="text-sm leading-relaxed text-gray-600 mb-3 text-md">We are a Lions Club in Fallbrook, CA, part of Lions International, a global service organization dedicated to making our communities better. Whether you&rsquo;re a current member or new visitor, you&rsquo;re welcome to learn more below.</p>
+				<p class="text-sm leading-relaxed text-gray-600 text-md">A Lions Club is a volunteer organization that brings people from your local community together to plan and run hands-on projects &mdash; like collecting used eyeglasses, hosting food drives, or building community gardens.</p>
 
 				<div class="divider mt-8 mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Club Officers</span></div>
 				<div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="members"></div>
@@ -189,10 +188,10 @@
 				<p class="text-sm leading-relaxed text-gray-600 mb-5">Do you want to make a difference right here in Fallbrook? Whether you&rsquo;re looking to volunteer at an event, lead a service project, or simply learn more about what we do, we&rsquo;d love to have you. Stop by one of our meetings or reach out to our Membership Chairperson, Val Fujihara.</p>
 
 				<div class="flex flex-wrap gap-3">
-					<a onclick="mailTo('Val Fujihara')" href="#" class="inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2 rounded transition-colors" style="opacity:1;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+					<a onclick="mailTo('Val Fujihara')" href="#" class="inline-flex items-center gap-2 bg-navy text-white text-md font-semibold px-4 py-2 rounded transition-colors" style="opacity:1;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
 						<i class="fa-solid fa-envelope"></i> Contact Val Fujihara
 					</a>
-					<a href="#meetings" class="inline-flex items-center gap-2 border text-sm font-semibold px-4 py-2 rounded transition-colors border-navy text-navy hover-bg-navy hover:text-white">
+					<a href="#meetings" class="inline-flex items-center gap-2 border text-md font-semibold px-4 py-2 rounded transition-colors border-navy text-navy hover-bg-navy hover:text-white">
 						<i class="fa-solid fa-calendar-days"></i> Meeting Information
 					</a>
 				</div>
@@ -204,19 +203,19 @@
 
 				<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 					<div class="border border-gray-200 rounded-lg p-4">
-						<p class="flex items-center gap-2 font-semibold text-navy text-sm mb-1">
+						<p class="flex items-center gap-2 font-semibold text-navy text-md mb-1">
 							<i class="fa-solid fa-store text-yellow-500"></i> Major Market
 						</p>
 						<a href="https://maps.app.goo.gl/4CL1fu9BAEUeZvp2A" class="text-blue-700 text-xs underline" target="_blank">845 S. Main Ave. Fallbrook</a>
 					</div>
 					<div class="border border-gray-200 rounded-lg p-4">
-						<p class="flex items-center gap-2 font-semibold text-navy text-sm mb-1">
+						<p class="flex items-center gap-2 font-semibold text-navy text-md mb-1">
 							<i class="fa-solid fa-building-columns text-yellow-500"></i> Community Center
 						</p>
 						<a href="https://maps.app.goo.gl/C6dwb64iNjNPB2si7" class="text-blue-700 text-xs underline" target="_blank">341 Heald Ln. Fallbrook</a>
 					</div>
 					<div class="border border-gray-200 rounded-lg p-4">
-						<p class="flex items-center gap-2 font-semibold text-navy text-sm mb-1">
+						<p class="flex items-center gap-2 font-semibold text-navy text-md mb-1">
 							<i class="fa-solid fa-hospital text-yellow-500"></i> Health &amp; Wellness Center
 						</p>
 						<a href="https://maps.app.goo.gl/kfxLbUSMyRGHMvMB9" class="text-blue-700 text-xs underline" target="_blank">1636 E. Mission Rd. Fallbrook</a>
@@ -232,7 +231,7 @@
 
 				<div id="meeting-notices"></div>
 
-				<div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-5 mb-6 text-sm text-gray-700">
+				<div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-5 mb-6 text-md text-gray-700">
 					<div class="flex items-center gap-2">
 						<i class="fa-solid fa-calendar-check text-blue-900"></i>
 						<span class="font-medium">2nd &amp; 4th Tuesday of the month</span>
@@ -253,7 +252,7 @@
 						<p class="font-semibold text-gray-800 mb-1">Community Health &amp; Wellness Center</p>
 						<p class="text-sm text-gray-500 leading-relaxed">1636 E. Mission Rd.<br>Fallbrook, CA 92028</p>
 						<p class="text-xs text-gray-400 mt-1 mb-3">Room 4 &mdash; check signs at entrance for any changes.</p>
-						<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center gap-2 bg-navy hover-bg-navy text-white text-sm font-semibold px-4 py-2 rounded transition-colors">
+						<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center gap-2 bg-navy hover-bg-navy text-white text-md font-semibold px-4 py-2 rounded transition-colors">
 							<i class="fa-solid fa-map-marker-alt"></i> View Directions
 						</a>
 					</div>
@@ -263,7 +262,7 @@
 					</div>
 				</div>
 
-				<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 mt-6 text-sm font-semibold text-navy transition-colors">
+				<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 mt-6 text-md font-semibold text-navy transition-colors">
 					<span>Meeting Minutes</span>
 					<i id="minutes-chevron" class="fa-solid fa-chevron-down transition-transform"></i>
 				</button>
@@ -287,7 +286,7 @@
 					<div>
 						<h2 class="text-2xl font-bold text-navy mb-3">A Global Movement of Service</h2>
 						<p class="text-sm leading-relaxed text-gray-600 mb-4">For over 100 years, Lions have served their local communities as a service organization. Local clubs are guided by eight global causes:</p>
-						<ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-600 list-disc pl-5">
+						<ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-md text-gray-600 list-disc pl-5">
 							<li>Childhood Cancer</li>
 							<li>Diabetes</li>
 							<li>Disaster Relief</li>
@@ -304,7 +303,7 @@
 				<div class="divider mt-8 mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Member Portal</span></div>
 
 				<p class="text-sm text-gray-600 mb-4">Lions members, log in to your Lion Portal here.</p>
-				<a href="https://lionsinternational.my.site.com/" target="_blank" class="inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2 rounded" style="opacity:1;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+				<a href="https://lionsinternational.my.site.com/" target="_blank" class="inline-flex items-center gap-2 bg-navy text-white text-md font-semibold px-4 py-2 rounded" style="opacity:1;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
 					<i class="fa-solid fa-link"></i> Access Lion Portal
 				</a>
 			</section>
@@ -312,7 +311,7 @@
 		</div>
 	</main>
 
-	<footer class="mt-12 py-10 bg-gray-300">
+	<footer class="mt-4 py-10 bg-gray-300">
 		<div class="max-w-4xl mx-auto px-4 text-center">
 			<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-8 mx-auto mb-4 opacity-30" />
 			<p class="text-xs text-gray-500 max-w-xl mx-auto mb-3">The Fallbrook Ranch Lions Club Foundation (EIN 41-4225752) is a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code. Contributions to the Foundation are tax-deductible as permitted by law. Contributions made directly to Fallbrook Ranch Lions Club are not tax-deductible.</p>
