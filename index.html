@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" 				content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Fallbrook Ranch Lions Club</title>
-	<meta name="description" 			content="The Fallbrook Ranch Lions Club is a volunteer organization local to Fallbrook, and a part of Lions International.">
-	<meta name="author" 				content="Fallbrook Ranch Lions Club">
+	<meta name="description" content="The Fallbrook Ranch Lions Club is a volunteer organization local to Fallbrook, and a part of Lions International.">
+	<meta name="author" content="Fallbrook Ranch Lions Club">
 
-	<meta property="og:title" 			content="Fallbrook Ranch Lions Club">
-	<meta property="og:description" 	content="The Fallbrook Ranch Lions Club is a volunteer organization local to Fallbrook, and a part of Lions International.">
-	<meta property="og:image" 			content="http://fallbrooklions.com/images/logo/lionlogo_1500.png">
-	<meta property="og:url" 			content="http://fallbrooklions.com">
-	<meta property="og:type" 			content="website">
+	<meta property="og:title" content="Fallbrook Ranch Lions Club">
+	<meta property="og:description" content="The Fallbrook Ranch Lions Club is a volunteer organization local to Fallbrook, and a part of Lions International.">
+	<meta property="og:image" content="http://fallbrooklions.com/images/logo/lionlogo_1500.png">
+	<meta property="og:url" content="http://fallbrooklions.com">
+	<meta property="og:type" content="website">
 
-	<meta name="twitter:card" 			content="summary_large_image">
-	<meta name="twitter:title" 			content="Fallbrook Ranch Lions Club">
-	<meta name="twitter:description" 	content="The Fallbrook Ranch Lions Club is a volunteer organization local to Fallbrook, and a part of Lions International.">
-	<meta name="twitter:image" 			content="http://fallbrooklions.com/images/logo/lionlogo_1500.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Fallbrook Ranch Lions Club">
+	<meta name="twitter:description" content="The Fallbrook Ranch Lions Club is a volunteer organization local to Fallbrook, and a part of Lions International.">
+	<meta name="twitter:image" content="http://fallbrooklions.com/images/logo/lionlogo_1500.png">
 
 	<script type="application/ld+json">
 		{
@@ -31,7 +31,6 @@
 
 	<link href="http://fallbrooklions.com/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
-	<!-- https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/ -->
 	<link rel="preload" href="./src/tailwind.min.css" as="style" />
 	<link rel="stylesheet" href="./src/tailwind.min.css" media="all" />
 
@@ -39,368 +38,286 @@
 		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 
-	<!-- https://unpkg.com/swiper/ -->
 	<link rel="stylesheet" href="./src/swiper-bundle.min.css" />
 	<script src="./src/swiper-bundle.min.js" defer></script>
 
 	<style>
-		html {
-			scroll-behavior: smooth;
-			scroll-padding-top: 5rem;
+		:root { --navy: #014d93; }
+
+		html { scroll-behavior: smooth; scroll-padding-top: 9rem; }
+		@media (min-width: 768px) { html { scroll-padding-top: 5.5rem; } }
+
+		body { font-family: 'Source Sans 3', sans-serif; }
+		h1, h2, h3, h4 { font-family: 'Lora', serif; }
+
+		.bg-navy { background-color: var(--navy); }
+		.hero-gradient { background: linear-gradient(135deg, #014d93 0%, #012d5a 100%); }
+		.text-navy { color: var(--navy); }
+		.border-navy { border-color: var(--navy); }
+		.hover-bg-navy:hover { background-color: #013d78; }
+
+		.hero-circle {
+			position: absolute;
+			right: -3rem; top: -3rem;
+			width: 14rem; height: 14rem;
+			border-radius: 9999px;
+			background: rgba(255,255,255,0.06);
+			pointer-events: none;
+		}
+		.hero-circle-sm {
+			position: absolute;
+			right: 6rem; bottom: -4rem;
+			width: 9rem; height: 9rem;
+			border-radius: 9999px;
+			background: rgba(255,204,0,0.08);
+			pointer-events: none;
 		}
 
-		body {
-			font-family: Inter, sans-serif;
-		}
+		.btn-ghost { border: 1.5px solid rgba(255,255,255,0.35); color: #fff; }
+		.btn-ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+		.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
 
-		h1 {
-			text-shadow: 2px 1px 0px #333;
+		.swiper-button-prev, .swiper-button-next {
+			color: #fff !important;
+			background: rgba(0,0,0,0.3);
+			width: 2.25rem !important; height: 2.25rem !important;
+			border-radius: 9999px;
 		}
-
-		h2,
-		h3 {
-			color: #005299;
-		}
-
-		nav {
-			background-color: #005299;
-			color: #fccc02;
-			text-shadow: 1px 1px 0px #333;
-		}
-
-		nav a:hover {
-			color: #fff;
-		}
+		.swiper-button-prev::after, .swiper-button-next::after { font-size: 0.8rem !important; }
+		.swiper-pagination-bullet-active { background: #f59e0b !important; }
 	</style>
 
 	<script src="./data.js" defer></script>
 	<script src="./scripts.js" defer></script>
-
-	<!-- <script async src="https://widgets.givebutter.com/latest.umd.cjs?acct=WwtIY5jWCPRf1lM6&p=other"></script> -->
+	<!-- Patch upcoming 2026 dates. Move these into data.js once confirmed. -->
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			if (typeof datesByYear !== 'undefined') {
+				var future2026 = [
+					"04-28","05-12","05-26","06-09","06-23",
+					"07-14","07-28","08-11","08-25",
+					"09-08","09-22","10-13","10-27","11-17"
+				];
+				if (!datesByYear[2026]) datesByYear[2026] = [];
+				future2026.forEach(function(d) {
+					if (datesByYear[2026].indexOf(d) === -1) datesByYear[2026].push(d);
+				});
+				datesByYear[2026].sort();
+				if (typeof renderNextMeetingDate === 'function') renderNextMeetingDate();
+			}
+		});
+	</script>
 </head>
 
-<body class="bg-gray-100" id="top">
+<body class="bg-gray-200 text-gray-700" id="top">
 	<a href="#main" class="sr-only focus:not-sr-only">Skip to main content</a>
 
-	<nav class="shadow-md fixed w-full z-20" role="navigation" aria-label="Main Navigation">
-		<div class="max-w-3xl mx-auto px-4 flex flex-col md:flex-row md:items-center py-4">
-			<a href="#top" class="flex items-center md:justify-start w-full md:w-auto">
-				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-12 md:h-16 flex-shrink-0" fetchpriority="high" />
-				<h1 class="ml-3 text-xl md:text-3xl font-bold text-white">
-					Fallbrook Ranch<br>Lions Club
-				</h1>
+	<!-- NAV -->
+	<nav class="bg-navy shadow-lg fixed w-full z-20" role="navigation" aria-label="Main Navigation">
+		<div class="max-w-4xl mx-auto px-4 py-3 flex flex-col md:flex-row md:items-center gap-2 md:gap-0">
+			<a href="#top" class="flex items-center gap-3">
+				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-10 md:h-12 flex-shrink-0" fetchpriority="high" />
+				<span class="text-white font-bold text-lg leading-tight" style="font-family:'Lora',serif;">Fallbrook Ranch<br>Lions Club</span>
 			</a>
-			<ul class="flex flex-wrap text-md mt-2 flex-shrink-0 md:grid md:grid-cols-2  md:space-x-0 md:ml-auto">
-				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#about" class="hover:underline">About Us</a></li>
-				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#volunteer" class="hover:underline">Volunteer</a></li>
-				<li class="py-1 px-3 sm:pr-4 sm:px-1 md:col-start-1"><a href="#meetings" class="hover:underline">Meetings</a></li>
-				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="#lci" class="hover:underline">Lions International</a></li>
-				<li class="py-1 px-3 sm:pr-4 sm:px-1"><a href="https://givebutter.com/vVKfD5" target="_blank" class="hover:underline">Donate Now</a></li>
+			<ul class="flex flex-wrap items-center gap-x-4 gap-y-1 md:ml-auto text-xs md:text-sm font-semibold uppercase tracking-wide">
+				<li><a href="#about"     class="text-white hover:text-yellow-300 transition-colors">About</a></li>
+				<li><a href="#volunteer" class="text-white hover:text-yellow-300 transition-colors">Volunteer</a></li>
+				<li><a href="#meetings"  class="text-white hover:text-yellow-300 transition-colors">Meetings</a></li>
+				<li><a href="#lci"       class="text-white hover:text-yellow-300 transition-colors">Lions Intl.</a></li>
+				<li><a href="https://givebutter.com/vVKfD5" target="_blank" class="bg-yellow-400 hover:bg-yellow-300 font-bold px-3 py-1 rounded transition-colors" style="color:#001f4d;">Donate</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<main id="main" class="pt-28 pb-12 text-gray-700" role="main" tabindex="-1">
-		<div id="announcements"></div>
-		<!-- <section id="news" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Fallbrook Ranch Lions Club News"> 
-			<div class="flex items-center mb-4">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Club News</span>
-				<hr class="border-gray-300 flex-grow">
+	<main id="main" class="pt-32 md:pt-24 pb-16" role="main" tabindex="-1">
+		<div class="max-w-4xl mx-auto px-4 space-y-8">
+
+			<!-- Dynamic announcements -->
+			<div id="announcements"></div>
+
+			<!-- HERO -->
+			<div class="hero-gradient rounded-xl px-6 py-10 md:px-10 md:py-12 flex flex-col md:flex-row items-center gap-6 md:gap-10 text-center md:text-left overflow-hidden relative">
+				<div class="hero-circle"></div>
+				<div class="hero-circle-sm"></div>
+				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-24 md:h-32 flex-shrink-0 opacity-90 relative z-10" />
+				<div class="relative z-10">
+					<p class="text-xs font-bold uppercase tracking-widest text-white mb-2">Fallbrook, California &middot; Est. 2025</p>
+					<h1 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-3">Serving Our Community<br>Through Action</h1>
+					<p class="text-blue-200 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">We are a newly chartered Lions Club &mdash; a volunteer organization that brings neighbors together to make Fallbrook a better place.</p>
+					<div class="flex flex-wrap justify-center md:justify-start gap-3 mt-6">
+						<a href="#volunteer" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold text-sm px-4 py-2 rounded transition-colors">
+							<i class="fa-solid fa-hand-holding-heart"></i> Get Involved
+						</a>
+						<a href="#meetings" class="btn-ghost inline-flex items-center gap-2 bg-transparent text-sm font-semibold px-4 py-2 rounded transition-colors">
+							<i class="fa-solid fa-calendar-days"></i> Upcoming Meetings
+						</a>
+					</div>
+				</div>
 			</div>
 
-			<h3 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6 text-center">
-				Charter Night
-				<span class="block text-sm font-medium text-slate-600 tracking-wide">Celebrate the official formation of the Fallbrook Ranch Lions Club.<br> Dinner & ceremony to follow.</span>
-			</h3>
-			
-			<ul class="space-y-4">
-				<li class="flex items-start gap-3">
-					<i class="fa-solid fa-calendar-days text-xl shrink-0"></i>
-					<p><span class="font-semibold">Date:</span> Sunday, August 17th</p>
-				</li>
-				<li class="flex items-start gap-3">
-					<i class="fa-solid fa-clock text-xl shrink-0"></i>
-					<p><span class="font-semibold">Time:</span> 5:00&nbsp;PM – 8:00&nbsp;PM</p>
-				</li>
-				<li class="flex items-start gap-3">
-					<i class="fa-solid fa-location-dot text-xl shrink-0"></i>
-					<p><span class="font-semibold">Location:</span> 127 West Social House, 127 West Elder St, Fallbrook</p>
-				</li>
-			</ul>
-			
-			<div class="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-2 text-sm">
-				<a href="https://square.link/u/hHGdoNWc" target="_blank" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 ring-1 ring-slate-300 text-slate-800 font-medium py-2 px-3 transition shadow-sm sm:flex-1">
-					<i class="fa-solid fa-ticket"></i>
-					Purchase Tickets Online
-				</a>
-				<a href="https://maps.app.goo.gl/p4UkAAsDVpZyYFyy5" target="_blank" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 ring-1 ring-slate-300 text-slate-800 font-medium py-2 px-3 transition shadow-sm sm:flex-1">
-					<i class="fa-solid fa-map-location-dot"></i>
-					Google Maps
-				</a>
-				<a href="./files/Fallbrook Lions Club Charter Night Invite.pdf" target="_blank" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 ring-1 ring-slate-300 text-slate-800 font-medium py-2 px-3 transition shadow-sm sm:flex-1">
-					<i class="fa-solid fa-file-arrow-down"></i>
-					Download Flyer
-				</a>
-			  </div>
-		</section> -->
+			<!-- ABOUT -->
+			<section id="about" class="bg-white rounded-xl shadow-sm border border-gray-200 px-6 py-7 md:px-8" aria-label="About the Fallbrook Ranch Lions Club">
+				<div class="divider mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">About Us</span></div>
 
-		<!-- <section id="calendar" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Club Calendar">
-		<div class="flex items-center mb-4">
-			<hr class="border-gray-300 flex-grow">
-			<span class="mx-4 text-gray-500 uppercase text-sm">Calendar</span>
-			<hr class="border-gray-300 flex-grow">
-		</div>
+				<h2 class="text-2xl font-bold text-navy mb-3">Who We Are</h2>
+				<p class="text-sm leading-relaxed text-gray-600 mb-3">We are a newly chartered Lions Club in Fallbrook, CA, part of Lions International &mdash; a global service organization dedicated to making our communities better. Whether you&rsquo;re a current member or new visitor, you&rsquo;re welcome to learn more below.</p>
+				<p class="text-sm leading-relaxed text-gray-600">A Lions Club is a volunteer organization that brings people from your local community together to plan and run hands-on projects &mdash; like collecting used eyeglasses, hosting food drives, or building community gardens.</p>
 
-		<div id="calendarWrap" class="mt-4 overflow-hidden transition-[max-height] duration-300 ease-out rounded-lg border border-gray-200 max-h-[180px]">
-			<iframe
-			id="calendarFrame" class="w-full" style="height:900px;"
-			src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=WEEK&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
-			data-week-src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=WEEK&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
-			data-month-src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=America%2FLos_Angeles&mode=MONTH&showTitle=0&showNav=1&showPrint=0&showTabs=0&showDate=1&showCalendars=0&wkst=1&showTz=0"
-			loading="lazy"
-			title="Google Calendar">
-			</iframe>
-		</div>
+				<div class="divider mt-8 mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Club Officers</span></div>
+				<div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="members"></div>
 
-		<button id="toggleCal" type="button" class="mt-4 mx-auto block w-full sm:w-80 rounded-lg bg-blue-600 text-white px-5 py-3 text-sm font-medium shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-expanded="false">
-			Expand Full Calendar
-		</button>
-		</section> -->
+				<div class="divider mt-8 mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Activity Photos</span></div>
+				<section id="gallery" class="rounded-lg overflow-hidden relative -mx-6 md:-mx-8 -mb-7">
+					<div class="swiper-pagination pt-3"></div>
+					<div class="swiper-container relative pb-12">
+						<div class="swiper-button-prev" aria-label="Previous slide"></div>
+						<div class="swiper-button-next" aria-label="Next slide"></div>
+						<div class="swiper-wrapper" id="activity-photos"></div>
+					</div>
+				</section>
+			</section>
 
-		<!-- <script>
-		var wrap=document.getElementById('calendarWrap');
-		var frame=document.getElementById('calendarFrame');
-		var btn=document.getElementById('toggleCal');
-		var open=false;
-		var mode='WEEK';
-		function setState(){
-			if(open){
-			wrap.style.maxHeight='900px';
-			if(mode!=='MONTH'){frame.src=frame.getAttribute('data-month-src');mode='MONTH';}
-			btn.textContent='Collapse';
-			btn.setAttribute('aria-expanded','true');
-			}else{
-			wrap.style.maxHeight='280px';
-			if(mode!=='WEEK'){frame.src=frame.getAttribute('data-week-src');mode='WEEK';}
-			btn.textContent='Expand Full Calendar';
-			btn.setAttribute('aria-expanded','false');
-			}
-		}
-		setState();
-		btn.addEventListener('click',function(){open=!open;setState();});
-		</script> -->
+			<!-- VOLUNTEER -->
+			<section id="volunteer" class="bg-white rounded-xl shadow-sm border border-gray-200 px-6 py-7 md:px-8" aria-label="Join our community, or seek ways to volunteer">
+				<div class="divider mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Serve the Community</span></div>
 
+				<h2 class="text-2xl font-bold text-navy mb-3">Join Us</h2>
+				<p class="text-sm leading-relaxed text-gray-600 mb-5">Do you want to make a difference right here in Fallbrook? Whether you&rsquo;re looking to volunteer at an event, lead a service project, or simply learn more about what we do, we&rsquo;d love to have you. Stop by one of our meetings or reach out to our Membership Chairperson, Val Fujihara.</p>
 
+				<div class="flex flex-wrap gap-3">
+					<a onclick="mailTo('Val Fujihara')" href="#" class="inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2 rounded transition-colors" style="opacity:1;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+						<i class="fa-solid fa-envelope"></i> Contact Val Fujihara
+					</a>
+					<a href="#meetings" class="inline-flex items-center gap-2 border text-sm font-semibold px-4 py-2 rounded transition-colors border-navy text-navy hover-bg-navy hover:text-white">
+						<i class="fa-solid fa-calendar-days"></i> Meeting Information
+					</a>
+				</div>
 
+				<div class="divider mt-8 mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Community Focus</span></div>
 
+				<h3 class="text-lg font-bold text-navy mb-2">Donate Your Used Eyeglasses</h3>
+				<p class="text-sm leading-relaxed text-gray-600 mb-5">Fallbrook Ranch Lions Club can take your used eyeglasses. Donated glasses are sorted, refurbished, and given free to patients who receive vision screenings. Drop them off at any of our donation boxes:</p>
 
-
-
-
-
-		<section id="about" class="max-w-3xl mx-auto bg-white px-8 pt-6 pb-6 md:rounded-lg shadow-md mb-12" aria-label="About the Fallbrook Ranch Lions Club">
-			<div class="flex items-center mb-4">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">About Us</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<p class="">We are a newly chartered Lions Club in Fallbrook, CA, part of Lions International — a global service organization dedicated to making our communities better. Whether you&rsquo;re a current member or new visitor, you&rsquo;re welcome to learn more below.</p>
-			
-			<p class="mt-4">A Lions Club is a volunteer organization that brings people from your local community together to plan and run hands-on projects — like collecting used eyeglasses, hosting food drives, or building community gardens.</p>
-
-			<div class="flex items-center mb-4 mt-4">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Officers</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4" id="members"></div>
-
-			<div class="flex items-center mt-6">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Activity Photos</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<section id="gallery" class="max-w-3xl mx-auto bg-white pt-5 pb-5 mt-2 md:rounded-lg shadow-md overflow-x-hidden relative" style="margin:0 -32px -32px -32px;">
-				<div class="swiper-pagination order-first"></div>
-				<div class="swiper-container relative mb-5">
-					<div class="swiper-button-prev p-9 bg-opacity-40 bg-white" aria-label="Previous slide"></div>
-					<div class="swiper-button-next p-9 bg-opacity-40 bg-white" aria-label="Next slide"></div>
-					<div class="swiper-wrapper" id="activity-photos"></div>
+				<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+					<div class="border border-gray-200 rounded-lg p-4">
+						<p class="flex items-center gap-2 font-semibold text-navy text-sm mb-1">
+							<i class="fa-solid fa-store text-yellow-500"></i> Major Market
+						</p>
+						<a href="https://maps.app.goo.gl/4CL1fu9BAEUeZvp2A" class="text-blue-700 text-xs underline" target="_blank">845 S. Main Ave. Fallbrook</a>
+					</div>
+					<div class="border border-gray-200 rounded-lg p-4">
+						<p class="flex items-center gap-2 font-semibold text-navy text-sm mb-1">
+							<i class="fa-solid fa-building-columns text-yellow-500"></i> Community Center
+						</p>
+						<a href="https://maps.app.goo.gl/C6dwb64iNjNPB2si7" class="text-blue-700 text-xs underline" target="_blank">341 Heald Ln. Fallbrook</a>
+					</div>
+					<div class="border border-gray-200 rounded-lg p-4">
+						<p class="flex items-center gap-2 font-semibold text-navy text-sm mb-1">
+							<i class="fa-solid fa-hospital text-yellow-500"></i> Health &amp; Wellness Center
+						</p>
+						<a href="https://maps.app.goo.gl/kfxLbUSMyRGHMvMB9" class="text-blue-700 text-xs underline" target="_blank">1636 E. Mission Rd. Fallbrook</a>
+					</div>
 				</div>
 			</section>
-		</section>
 
-		<section id="volunteer" class="max-w-3xl mx-auto bg-white px-8 pt-4 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Join our community, or seek ways to volunteer">
-			<div class="flex items-center mb-4">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Serve the community &amp; volunteer</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
+			<!-- MEETINGS -->
+			<section id="meetings" class="bg-white rounded-xl shadow-sm border border-gray-200 px-6 py-7 md:px-8" aria-label="Meeting time, location, and minutes">
+				<div class="divider mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Meetings</span></div>
 
-			<h3 class="text-3xl font-bold my-4">Join Us.</h3>
+				<h2 class="text-2xl font-bold text-navy mb-4">Meeting Time &amp; Location</h2>
 
-			<p class="mb-4"> Do you want to make a difference right here in Fallbrook? Whether you&rsquo;re looking to volunteer at an event, lead a service project, or simply learn more about what we do, we&rsquo;d love to have you. Stop by one of our meetings or click the button below to get in touch with our Membership Chairperson, Val Fujihara.</p>
+				<div id="meeting-notices"></div>
 
-			<a onClick="mailTo('Val Fujihara')" href="#" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto mr-3">
-				<i class="fa-solid fa-envelope mr-2"></i>
-				Contact Val Fujihara
-			</a>
-
-			<a href="#meetings" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded mx-auto">
-				<i class="fa-solid fa-calendar-days mr-2"></i>
-				Meeting Information
-			</a>
-
-			<div class="flex items-center mb-4 mt-6">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Community Focus</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<h3 class="text-2xl font-bold mt-7 mb-4">Donate Your Used Eyeglasses</h3>
-
-			<p class="">Fallbrook Ranch Lions Club can take your used eyeglasses. One of the Lions Clubs' global causes is vision. Donated eyeglasses are first sorted and refurbished, then given free to patients that receive vision screenings around the county until a comprehensive eye exam and eye wear are obtained. We have the following locations in town where glasses can be dropped off in our donation boxes:</p>
-
-			<ul class="mt-4 space-y-2">
-				<li>
-					<strong>Major Market</strong> -
-					<a href="https://maps.app.goo.gl/4CL1fu9BAEUeZvp2A" class="text-blue-500" target="_blank">845 S.
-						Main Ave. Fallbrook</a>
-				</li>
-				<li>
-					<strong>Fallbrook Community Center</strong> -
-					<a href="https://maps.app.goo.gl/C6dwb64iNjNPB2si7" class="text-blue-500" target="_blank">341 Heald
-						Ln. Fallbrook</a>
-				</li>
-				<li>
-					<strong>Community Health & Wellness Center</strong> -
-					<a href="https://maps.app.goo.gl/kfxLbUSMyRGHMvMB9" class="text-blue-500" target="_blank">1636 E.
-						Mission Rd. Fallbrook</a>
-				</li>
-			</ul>
-		</section>
-
-		<section id="meetings" class="max-w-3xl mx-auto bg-white px-8 pt-4 pb-6 md:rounded-lg shadow-md mb-12" aria-label="Meeting time, location, and minutes">
-			<div class="flex items-center mb-4">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Meetings</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<h3 class="text-2xl font-bold mb-4">Meeting Time &amp; Location</h3>
-
-			<!-- Meeting Delay/Notice -->
-			<div id="meeting-notices"></div>
-
-			<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-4">
-				<div class="flex items-center justify-center space-x-2">
-					<i class="fa-solid fa-calendar-check text-blue-500"></i>
-					<span class="font-medium">2nd &amp; 4th Tuesday</span>
+				<div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-5 mb-6 text-sm text-gray-700">
+					<div class="flex items-center gap-2">
+						<i class="fa-solid fa-calendar-check text-blue-900"></i>
+						<span class="font-medium">2nd &amp; 4th Tuesday of the month</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<i class="fa-solid fa-clock text-blue-900"></i>
+						<span>6:00 PM &ndash; 7:00 PM</span>
+					</div>
+					<!-- next-meeting: script writes two lines with <br>, so give it its own block -->
+					<div class="flex items-start gap-2 font-semibold text-red-700">
+						<i class="fa-solid fa-calendar-days text-red-500 mt-0.5"></i>
+						<span id="next-meeting"></span>
+					</div>
 				</div>
 
-				<div class="flex items-center justify-center space-x-2">
-					<i class="fa-solid fa-clock text-blue-500"></i>
-					<span>6:00 p.m. - 7:00 p.m.</span>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<p class="font-semibold text-gray-800 mb-1">Community Health &amp; Wellness Center</p>
+						<p class="text-sm text-gray-500 leading-relaxed">1636 E. Mission Rd.<br>Fallbrook, CA 92028</p>
+						<p class="text-xs text-gray-400 mt-1 mb-3">Room 4 &mdash; check signs at entrance for any changes.</p>
+						<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center gap-2 bg-navy hover-bg-navy text-white text-sm font-semibold px-4 py-2 rounded transition-colors">
+							<i class="fa-solid fa-map-marker-alt"></i> View Directions
+						</a>
+					</div>
+					<div class="rounded-lg overflow-hidden border border-gray-200">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3331.3150181608535!2d-117.23156488789806!3d33.38894475235047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc7f760613f4ff%3A0x7d20d9992c2e1137!2sFRHD%20-%20Community%20Health%20%26%20Wellness%20Center!5e0!3m2!1sen!2sus!4v1732656737611!5m2!1sen!2sus"
+							class="w-full h-44 md:h-40" allowfullscreen loading="lazy"></iframe>
+					</div>
 				</div>
 
-				<div class="flex items-center justify-center space-x-2">
-					<i class="fa-solid fa-calendar-days text-red-600"></i>
-					<span id="next-meeting" class="font-semibold text-red-600"></span>
+				<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 mt-6 text-sm font-semibold text-navy transition-colors">
+					<span>Meeting Minutes</span>
+					<i id="minutes-chevron" class="fa-solid fa-chevron-down transition-transform"></i>
+				</button>
+
+				<div id="minutes-panel" class="max-h-0 overflow-hidden transition-[max-height] duration-300">
+					<div class="divider mt-6 mb-4"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Minutes</span></div>
+					<div id="minutes-tabs" class="flex gap-2 border-b border-gray-200 mb-4"></div>
+					<div id="minutes-panels"></div>
+					<p class="text-xs text-gray-400 mt-4">
+						Missing minutes? Contact <a onclick="mailTo('Alfonso Ramos')" href="#" class="text-blue-700 underline">Alfonso</a>.
+					</p>
 				</div>
-			</div>
+			</section>
 
-			<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-				<div class="space-y-1">
-					<p class="font-semibold text-gray-800">Community Health &amp; Wellness Center</p>
-					<p class="">1636 E. Mission Rd.<br>Fallbrook, CA 92028</p>
-					<p class="text-xs text-gray-500 py-2">Room 4, but may change—check signs at the entrance.</p>
-					<a href="https://maps.app.goo.gl/Akk6pw1LT7Rgi8pY7" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded shadow mt-2">
-						<i class="fa-solid fa-map-marker-alt mr-2"></i>
-						View Directions
-					</a>
+			<!-- LIONS INTERNATIONAL -->
+			<section id="lci" class="bg-white rounded-xl shadow-sm border border-gray-200 px-6 py-7 md:px-8" aria-label="More information about Lions International">
+				<div class="divider mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Lions International</span></div>
 
-				</div>
-				<div class="rounded-lg overflow-hidden shadow">
-					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3331.3150181608535!2d-117.23156488789806!3d33.38894475235047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc7f760613f4ff%3A0x7d20d9992c2e1137!2sFRHD%20-%20Community%20Health%20%26%20Wellness%20Center!5e0!3m2!1sen!2sus!4v1732656737611!5m2!1sen!2sus" class="w-full h-48 md:h-40" allowfullscreen loading="lazy">
-					</iframe>
-				</div>
-			</div>
-
-			<button id="minutes-toggle" type="button" class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 mt-6 hover:bg-gray-100 rounded">
-				<span class="text-sm font-semibold">Click to see meeting minutes</span>
-				<i id="minutes-chevron" class="fa-solid fa-chevron-down transition-transform"></i>
-			</button>
-
-			<div id="minutes-panel" class="max-h-0 overflow-hidden transition-[max-height] duration-300">
-				<div class="flex items-center mb-4 mt-6">
-					<hr class="border-gray-300 flex-grow">
-					<span class="mx-4 text-gray-500 uppercase text-sm">Minutes</span>
-					<hr class="border-gray-300 flex-grow">
+				<div class="flex flex-col md:flex-row gap-8 items-start">
+					<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-36 w-auto flex-shrink-0 hidden md:block opacity-80" />
+					<div>
+						<h2 class="text-2xl font-bold text-navy mb-3">A Global Movement of Service</h2>
+						<p class="text-sm leading-relaxed text-gray-600 mb-4">For over 100 years, Lions have served their local communities as a service organization. Local clubs are guided by eight global causes:</p>
+						<ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-600 list-disc pl-5">
+							<li>Childhood Cancer</li>
+							<li>Diabetes</li>
+							<li>Disaster Relief</li>
+							<li>Environment</li>
+							<li>Humanitarian</li>
+							<li>Hunger</li>
+							<li>Vision</li>
+							<li>Youth</li>
+						</ul>
+						<p class="text-sm text-gray-500 mt-4">To learn more, visit <a href="https://lionsclubs.org" target="_blank" class="text-blue-700 underline font-semibold">lionsclubs.org</a>.</p>
+					</div>
 				</div>
 
-				<div id="minutes-tabs" class="flex gap-2 border-b border-gray-200 mb-4"></div>
-				<div id="minutes-panels"></div>
+				<div class="divider mt-8 mb-5"><span class="text-xs font-bold uppercase tracking-widest text-gray-400 whitespace-nowrap">Member Portal</span></div>
 
-				<p class="text-sm mt-4">
-					If a meeting's minutes you need are not online yet, please contact
-					<a onClick="mailTo('Alfonso Ramos')" href="#" class="text-blue-500 underline">Alfonso</a>.
-				</p>
-			</div>
-		</section>
+				<p class="text-sm text-gray-600 mb-4">Lions members, log in to your Lion Portal here.</p>
+				<a href="https://lionsinternational.my.site.com/" target="_blank" class="inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-4 py-2 rounded" style="opacity:1;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+					<i class="fa-solid fa-link"></i> Access Lion Portal
+				</a>
+			</section>
 
-		<section id="lci" class="max-w-3xl mx-auto bg-white px-8 pt-4 pb-6 md:rounded-lg shadow-md" aria-label="More information about Lions International">
-			<h2 class="text-3xl font-bold mb-4">Lions International</h2>
-
-			<div class="flex items-start mb-6">
-				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-64 w-auto mr-6 flex-shrink-0 hidden md:block" />
-
-				<div>
-					<p>For over 100 years, Lions have served their local communities as a service organization. Local clubs can find a variety of service projects that benefit their communities and also use the Lions' eight global causes to guide them:</p>
-
-					<ul class="grid grid-cols-1 md:grid-cols-2 list-disc pl-6 mt-4 mb-4 gap-y-2">
-						<li>Childhood cancer</li>
-						<li>Diabetes</li>
-						<li>Disaster relief</li>
-						<li>Environment</li>
-						<li>Humanitarian</li>
-						<li>Hunger</li>
-						<li>Vision</li>
-						<li>Youth</li>
-					</ul>
-
-				</div>
-			</div>
-			<p class="mt-4">To learn more about Lions International, visit <a href="https://lionsclubs.org" target="_blank" class="text-blue-500 underline">lionsclubs.org</a>.</p>
-
-			<div class="flex items-center mt-4 mb-4">
-				<hr class="border-gray-300 flex-grow">
-				<span class="mx-4 text-gray-500 uppercase text-sm">Lions International Portal</span>
-				<hr class="border-gray-300 flex-grow">
-			</div>
-
-			<p class="mt-4">Lions members, login into your Lion Portal here.</p>
-
-			<a href="https://lionsinternational.my.site.com/" target="_blank" class="inline-flex items-center px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded">
-				<i class="fa-solid fa-link mr-2"></i>
-				Access your Lion Portal
-			</a>
-		</section>
-
+		</div>
 	</main>
 
-	<footer class="bg-gray-100 py-6 max-w-3xl mx-auto">
-		<p class="text-muted text-center text-gray-500 mb-5 text-sm">The Fallbrook Ranch Lions Club Foundation (EIN 41-4225752) is a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code. Contributions to Fallbrook Ranch Lions Club Foundation are tax-deductible as permitted by law. Contributions made directly to Fallbrook Ranch Lions Club are not tax-deductible. All donations to the foundation benefit Fallbrook Ranch Lions Club.</p>
-		<p class="text-center text-xs text-gray-400 opacity-50">
-			Website by <a href="https://dellaport.dev" target="_blank" class="text-blue-400 underline">Dellaport.dev</a>, a local Lions Club member.
-		</p>
+	<footer class="mt-12 py-10 bg-gray-300">
+		<div class="max-w-4xl mx-auto px-4 text-center">
+			<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-8 mx-auto mb-4 opacity-30" />
+			<p class="text-xs text-gray-500 max-w-xl mx-auto mb-3">The Fallbrook Ranch Lions Club Foundation (EIN 41-4225752) is a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code. Contributions to the Foundation are tax-deductible as permitted by law. Contributions made directly to Fallbrook Ranch Lions Club are not tax-deductible.</p>
+			<p class="text-xs text-gray-400">Website by <a href="https://dellaport.dev" target="_blank" class="underline">Dellaport.dev</a>, a local Lions Club member.</p>
+		</div>
 	</footer>
 </body>
-
 </html>

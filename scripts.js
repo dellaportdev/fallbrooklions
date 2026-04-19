@@ -127,7 +127,7 @@ function renderNextMeetingDate() {
     const monthName = new Date(found.year, mm - 1, 1).toLocaleString('default', { month: 'long' });
 
     document.getElementById('next-meeting').innerHTML =
-        `Next Meeting:<br>Tuesday, ${monthName} ${dd}`;
+        `Next Meeting: Tuesday, ${monthName} ${dd}`;
 }
 
 function renderMinutes(year) {
