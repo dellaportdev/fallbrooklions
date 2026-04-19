@@ -60,14 +60,19 @@ function renderPhotos() {
         const img = document.createElement('img');
         img.src = photoPath + file;
         img.alt = caption;
-        img.className = 'mx-auto max-h-64 shadow-lg border-2';
+        img.className = 'mx-auto shadow-lg border-2';
 
         a.appendChild(img);
 
         const figcap = document.createElement('p');
-        figcap.className = 'text-center text-sm mt-2 text-gray-700';
+        figcap.className = 'text-center text-sm text-gray-700';
         figcap.innerText = caption;
 
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'swiper-slide-img-wrap';
+        imgWrap.appendChild(img);
+
+        a.appendChild(imgWrap);
         a.appendChild(figcap);
 
         const slide = document.createElement('div');
