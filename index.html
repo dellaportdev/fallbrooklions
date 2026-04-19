@@ -107,6 +107,23 @@
 		.swiper-slide:nth-child(4n+2) img { animation: pan-left  10s ease-in-out infinite alternate; }
 		.swiper-slide:nth-child(4n+3) img { animation: pan-down  10s ease-in-out infinite alternate; }
 		.swiper-slide:nth-child(4n+4) img { animation: pan-up    10s ease-in-out infinite alternate; }
+
+		#nav-check { display: none; }
+
+		.nav-links { display: none; }
+		.nav-mobile { display: none; }
+
+		#nav-check:checked ~ div .nav-mobile { display: block; }
+
+		.nav-donate { padding: 0.5rem 1rem; }
+
+		.nav-gradient { background: linear-gradient(135deg, #014d93 70%, #013570 100%); }
+
+		@media (min-width: 768px) {
+			label[for="nav-check"] { display: none; }
+			.nav-mobile { display: none !important; }
+			.nav-links { display: flex; flex-direction: row; align-items: center; gap: 1.25rem; list-style: none; margin: 0;  font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+		}
 	</style>
 
 	<script src="./data.js" defer></script>
@@ -128,29 +145,67 @@
 			}
 		});
 	</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		document.querySelectorAll('.nav-mobile a').forEach(function(a) {
+			a.addEventListener('click', function() {
+				document.getElementById('nav-check').checked = false;
+			});
+		});
+	});
+</script>
 </head>
 
 <body class="bg-gray-200 text-gray-700" id="top">
 	<a href="#main" class="sr-only focus:not-sr-only">Skip to main content</a>
 
 	<!-- NAV -->
-	<nav class="bg-navy shadow-lg fixed w-full z-20" role="navigation" aria-label="Main Navigation">
-		<div class="max-w-4xl mx-auto px-4 py-3 flex flex-col md:flex-row md:items-center gap-2 md:gap-0">
-			<a href="#top" class="flex items-center gap-3">
-				<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-10 md:h-12 flex-shrink-0" fetchpriority="high" />
-				<span class="text-white font-bold text-lg leading-tight" style="font-family:'Lora',serif;">Fallbrook Ranch<br>Lions Club</span>
-			</a>
-			<ul class="flex flex-wrap items-center gap-x-4 gap-y-1 md:ml-auto text-xs md:text-md font-semibold uppercase tracking-wide">
-				<li><a href="#about"     class="text-white hover:text-yellow-300 transition-colors">About</a></li>
-				<li><a href="#volunteer" class="text-white hover:text-yellow-300 transition-colors">Volunteer</a></li>
-				<li><a href="#meetings"  class="text-white hover:text-yellow-300 transition-colors">Meetings</a></li>
-				<li><a href="#lci"       class="text-white hover:text-yellow-300 transition-colors">Lions Intl.</a></li>
-				<li><a href="https://givebutter.com/vVKfD5" target="_blank" class="bg-yellow-400 hover:bg-yellow-300 font-bold px-3 py-1 rounded transition-colors" style="color:#001f4d;">Donate</a></li>
-			</ul>
+	<nav class="nav-gradient shadow-lg fixed w-full z-20" role="navigation" aria-label="Main Navigation">
+		<input type="checkbox" id="nav-check" />
+		<div class="max-w-4xl mx-auto px-4 py-4">
+			<div class="flex items-center justify-between">
+				<a href="#top" class="flex items-center gap-3">
+					<img src="https://fallbrooklions.com/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="h-10 md:h-12 flex-shrink-0" fetchpriority="high" />
+					<span class="text-white font-bold text-lg leading-tight" style="font-family:'Lora',serif;">Fallbrook Ranch<br>Lions Club</span>
+				</a>
+
+				<label for="nav-check" class="md:hidden text-white p-2 cursor-pointer select-none">
+					<i class="fa-solid fa-bars text-xl"></i>
+				</label>
+
+				<ul class="nav-links">
+					<li><a href="#about"     class="text-white hover:text-yellow-300 transition-colors">About</a></li>
+					<li><a href="#volunteer" class="text-white hover:text-yellow-300 transition-colors">Volunteer</a></li>
+					<li><a href="#meetings"  class="text-white hover:text-yellow-300 transition-colors">Meetings</a></li>
+					<li><a href="#lci"       class="text-white hover:text-yellow-300 transition-colors">Lions Intl.</a></li>
+					<li>
+						<a href="https://givebutter.com/vVKfD5" target="_blank" class="nav-donate inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 font-bold rounded transition-colors" style="color:#014d93;padding:0.45rem;">
+							<i class="fa-solid fa-hand-holding-heart"></i> Donate
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Mobile dropdown -->
+			<div class="nav-mobile">
+				<ul class="flex flex-col gap-1 pt-2 pb-1 text-sm font-semibold uppercase tracking-wide list-none">
+					<li><a href="#about"     class="block text-white hover:text-yellow-300 transition-colors py-1">About</a></li>
+					<li><a href="#volunteer" class="block text-white hover:text-yellow-300 transition-colors py-1">Volunteer</a></li>
+					<li><a href="#meetings"  class="block text-white hover:text-yellow-300 transition-colors py-1">Meetings</a></li>
+					<li><a href="#lci"       class="block text-white hover:text-yellow-300 transition-colors py-1">Lions International.</a></li>
+					<li>
+						<a href="https://givebutter.com/vVKfD5" target="_blank" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 font-bold rounded transition-colors mt-1" style="color:#014d93;padding:0.45rem;">
+							<i class="fa-solid fa-hand-holding-heart"></i> Donate
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
-	<main id="main" class="pt-32 md:pt-20 pb-8" role="main" tabindex="-1">
+
+	<main id="main" class="pt-16 md:pt-20 pb-8" role="main" tabindex="-1">
 		<div class="max-w-4xl mx-auto px-4 space-y-8">
 
 			<!-- Dynamic announcements -->
