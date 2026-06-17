@@ -8,7 +8,7 @@ const memberPhotoPath = './images/members/';
 			{ name: 'Lorene Morris', 	role: 'Service Chairperson,Second Vice President', 	image: 'lorene.png' },
 		];
 
-		const photoPath = 'https://fallbrooklions.com/images/photos/';
+		const photoPath = 'https://fallbrooklions.org/images/photos/';
 		const photos = [
 			{ file: 'christmas1.jpg', 		caption: 'Fallbrook Lions at the Fallbrook Christmas Parade' },
 			{ file: 'christmas2.jpg', 		caption: 'Fallbrook Lions at the Fallbrook Christmas Parade' },
