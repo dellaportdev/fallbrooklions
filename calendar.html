@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Events Calendar | Fallbrook Ranch Lions Club</title>
+	<meta name="description" content="Fallbrook Ranch Lions Club events, meetings, fundraisers, and community service calendar.">
+	<meta name="author" content="Fallbrook Ranch Lions Club">
+
+	<meta property="og:title" content="Events Calendar | Fallbrook Ranch Lions Club">
+	<meta property="og:description" content="Fallbrook Ranch Lions Club events, meetings, fundraisers, and community service calendar.">
+	<meta property="og:image" content="https://fallbrooklions.org/images/logo/lionlogo_1500.png">
+	<meta property="og:url" content="https://fallbrooklions.org/calendar.html">
+	<meta property="og:type" content="website">
+
+	<link href="https://fallbrooklions.org/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<script>
+		tailwind = {
+			config: {
+				theme: {
+					extend: {
+						colors: {
+							navy: '#014d93'
+						},
+						fontFamily: {
+							sans: ['Source Sans 3', 'sans-serif'],
+							serif: ['Lora', 'serif']
+						}
+					}
+				}
+			}
+		};
+	</script>
+
+	<link rel="stylesheet" href="./src/stylesheet.css" media="all" />
+	<link rel="stylesheet" href="./src/calendar.css" media="all" />
+    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+	<script src="./src/data-calendar.js" defer></script>
+	<script src="./src/calendar.js" defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                --navy: #014d93;
+                --navy-dark: #013d78;
+                --gold: #facc15;
+            }
+        }
+
+        @layer components {
+            .calendar-page-shell {
+                @apply bg-gray-200 text-gray-700;
+            }
+
+            .calendar-main {
+                @apply pt-16 md:pt-20 pb-8;
+            }
+
+            .calendar-container {
+                @apply max-w-6xl mx-auto px-4 space-y-8;
+            }
+
+            .calendar-hero {
+                @apply hero-gradient rounded-xl px-6 py-10 md:px-10 md:py-12 text-center overflow-hidden relative;
+            }
+
+            .calendar-hero-kicker {
+                @apply text-xs font-bold uppercase tracking-widest text-white mb-2;
+            }
+
+            .calendar-hero-title {
+                @apply text-3xl md:text-4xl font-bold text-white leading-tight mb-3;
+            }
+
+            .calendar-hero-text {
+                @apply text-blue-200 text-md leading-relaxed max-w-2xl mx-auto;
+            }
+
+            .calendar-grid-wrap {
+                @apply bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden;
+            }
+
+            .calendar-month-panel {
+                @apply bg-white;
+            }
+
+            .calendar-month-header {
+                @apply bg-slate-50 border-b border-gray-200;
+            }
+
+            .calendar-month-header-controls {
+                @apply block p-4;
+            }
+
+            .calendar-month-nav {
+                @apply grid items-center gap-3;
+                grid-template-columns: minmax(0, 1fr) minmax(12rem, 3fr) minmax(0, 1fr);
+            }
+
+            .calendar-month-button {
+                @apply inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-extrabold text-blue-900 shadow-sm transition;
+            }
+
+            .calendar-month-button:hover:not(:disabled) {
+                @apply bg-blue-50 border-blue-300;
+            }
+
+            .calendar-month-button:disabled {
+                @apply cursor-not-allowed opacity-40;
+            }
+
+            .calendar-month-center {
+                @apply flex flex-row flex-nowrap items-center justify-center gap-3 min-w-0;
+            }
+
+            .calendar-month-label {
+                @apply whitespace-nowrap text-[#014d93] font-extrabold leading-none;
+                font-family: 'Lora', serif;
+                font-size: clamp(1.45rem, 4vw, 2.15rem);
+            }
+
+            .calendar-year-select-inline {
+                @apply min-h-11 rounded-xl border-2 border-blue-200 bg-white px-3 pr-8 py-1 text-[#014d93] font-black leading-none;
+                font-size: clamp(1.15rem, 3vw, 1.55rem);
+            }
+
+            .calendar-year-select-inline:focus {
+                @apply border-navy outline-none ring-4 ring-blue-900/20;
+            }
+
+            .calendar-scroll-viewport {
+                @apply overflow-visible;
+            }
+
+            .calendar-scroll-track {
+                @apply block;
+            }
+
+            .calendar-month-grid {
+                @apply grid grid-cols-7 bg-gray-200 gap-px;
+            }
+
+            .calendar-day-heading {
+                @apply bg-gray-100 px-2 py-3 text-center text-xs font-black uppercase tracking-wider text-gray-500;
+            }
+
+            .calendar-day {
+                @apply min-h-24 bg-white p-2 text-sm transition;
+            }
+
+            .calendar-day-empty {
+                @apply bg-gray-50;
+            }
+
+            .calendar-day-number {
+                @apply mb-1 text-xs font-black text-gray-500;
+            }
+
+            .calendar-day-has-events {
+                @apply bg-white;
+            }
+
+            .calendar-day-has-public-events {
+                @apply cursor-pointer;
+            }
+
+            .calendar-day-has-public-events:hover {
+                @apply bg-yellow-50;
+            }
+
+            .calendar-day-selected {
+                @apply ring-4 ring-inset ring-blue-900;
+            }
+
+            .calendar-chip {
+                @apply mb-1 flex w-full items-center gap-1 rounded-lg border border-solid px-2 py-1 text-left text-xs font-bold leading-tight;
+            }
+
+            .calendar-chip-muted {
+                @apply cursor-default opacity-60;
+            }
+
+            .calendar-category-badge {
+                @apply inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-1 text-xs font-black uppercase tracking-wide;
+            }
+
+            .calendar-event-list {
+                @apply space-y-4;
+            }
+
+            .calendar-list-summary {
+                @apply mb-4 text-sm md:text-base font-semibold text-gray-600;
+            }
+
+            .calendar-clear-filter {
+                @apply mt-2 inline-flex rounded-full border border-blue-200 bg-white px-3 py-1.5 text-sm font-black text-[#014d93] transition sm:ml-3 sm:mt-0;
+            }
+
+            .calendar-clear-filter:hover {
+                @apply bg-navy text-white;
+            }
+
+            .event-card {
+                @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm;
+            }
+
+            .event-card-with-date {
+                @apply grid items-start gap-4 md:grid-cols-[7rem_minmax(0,1fr)];
+            }
+
+            .event-card-body {
+                @apply min-w-0;
+            }
+
+            .event-card-past {
+                @apply opacity-80;
+            }
+
+            .event-date-rail {
+                @apply flex h-fit flex-col items-center justify-center self-start rounded-2xl border border-gray-200 bg-slate-50 px-3 py-4 text-center text-gray-800;
+            }
+
+            .event-date-rail-month {
+                @apply text-xs font-black uppercase tracking-widest text-[#014d93];
+            }
+
+            .event-date-rail-day {
+                @apply mt-1 text-4xl font-black leading-none text-gray-900;
+                font-family: 'Lora', serif;
+            }
+
+            .event-date-rail-weekday {
+                @apply mt-1 text-xs font-black uppercase text-gray-500;
+            }
+
+            .event-date-rail-time {
+                @apply mt-3 w-full border-t border-gray-200 pt-3 text-xs font-black leading-snug text-gray-700;
+            }
+
+            .event-card-past .event-date-rail {
+                @apply bg-gray-100 text-gray-500;
+            }
+
+            .event-card-top {
+                @apply flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between;
+            }
+
+            .event-title {
+                @apply text-xl md:text-2xl font-bold text-[#014d93];
+            }
+
+            .event-date-line {
+                @apply mt-1 text-sm font-semibold text-gray-500;
+            }
+
+            .event-past-notice {
+                @apply mt-4 rounded-lg border-l-4 border-gray-400 bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600;
+            }
+
+            .event-summary {
+                @apply mt-4 text-base leading-relaxed text-gray-600;
+            }
+
+            .event-details-grid {
+                @apply mt-5 grid gap-4;
+            }
+
+            .event-location {
+                @apply flex items-start gap-3 rounded-xl bg-gray-50 p-4 text-sm text-gray-600;
+            }
+
+            .event-location i {
+                @apply mt-1 text-yellow-500;
+            }
+
+            .event-links {
+                @apply flex flex-col gap-2 sm:flex-row sm:flex-wrap;
+            }
+
+            .event-link-button {
+                @apply inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-black text-[#014d93] shadow-sm transition;
+            }
+
+            .event-link-button:hover {
+                @apply bg-navy text-white;
+            }
+
+            .calendar-day-today {
+                @apply bg-blue-50 ring-2 ring-inset ring-blue-200;
+            }
+
+            .calendar-day-today .calendar-day-number {
+                @apply inline-flex h-7 w-7 items-center justify-center rounded-full font-black text-blue-950;
+            }
+
+            .calendar-day-selected.calendar-day-today {
+                @apply ring-4 ring-inset ring-blue-900;
+            }
+        }
+
+        @layer utilities {
+            .text-navy {
+                color: var(--navy);
+            }
+
+            .bg-navy {
+                background-color: var(--navy);
+            }
+
+            .border-navy {
+                border-color: var(--navy);
+            }
+
+            .hover-bg-navy:hover {
+                background-color: var(--navy-dark);
+            }
+
+            .text-gold {
+                color: var(--gold);
+            }
+
+            .bg-gold {
+                background-color: var(--gold);
+            }
+
+            .border-gold {
+                border-color: var(--gold);
+            }
+
+            @media (max-width: 640px) {
+                .calendar-month-nav {
+                    @apply grid gap-2;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .calendar-month-center {
+                    @apply order-first col-span-2 flex w-full flex-wrap items-center justify-center gap-2;
+                }
+
+                .calendar-month-label {
+                    @apply text-center;
+                    font-size: clamp(1.35rem, 8vw, 1.85rem);
+                }
+
+                .calendar-year-select-inline {
+                    @apply min-h-10 px-2.5 pr-7 py-1;
+                    font-size: clamp(1rem, 6vw, 1.35rem);
+                }
+
+                .calendar-month-button {
+                    @apply w-full min-w-0 px-2 py-2 text-xs;
+                }
+
+                .calendar-month-button span {
+                    @apply truncate;
+                }
+
+                .calendar-day {
+                    @apply min-h-20 p-1.5;
+                }
+
+                .calendar-chip {
+                    @apply px-1.5 py-1 text-[0.65rem];
+                }
+
+                .event-card-with-date {
+                    @apply grid-cols-1;
+                }
+
+                .event-date-rail {
+                    @apply grid min-h-0 grid-cols-[auto_auto_1fr] items-center justify-start px-4 py-3 text-left;
+                }
+
+                .event-date-rail-month {
+                    @apply col-start-1 row-start-1;
+                }
+
+                .event-date-rail-day {
+                    @apply col-start-1 row-start-2 mt-0 text-3xl;
+                }
+
+                .event-date-rail-weekday {
+                    @apply col-start-2 row-start-2 mb-1 ml-2 self-end;
+                }
+
+                .event-date-rail-time {
+                    @apply col-start-3 row-span-2 row-start-1 ml-4 mt-0 w-auto border-l border-t-0 border-gray-200 pl-4 pt-0;
+                }
+            }
+        }
+    </style>
+</head>
+<body class="site-body" id="top">
+	<a href="#main" class="skip-link">Skip to main content</a>
+
+	<nav class="site-nav nav-gradient" role="navigation" aria-label="Main Navigation">
+		<input type="checkbox" id="nav-check" />
+		<div class="site-nav-inner">
+			<div class="site-nav-row">
+				<a href="./index.html#top" class="site-brand">
+					<img src="https://fallbrooklions.org/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="site-brand-logo" fetchpriority="high" />
+					<span class="brand-title">Fallbrook Ranch<br>Lions Club</span>
+				</a>
+
+				<label for="nav-check" class="nav-menu-button">
+					<i class="fa-solid fa-bars text-xl"></i>
+				</label>
+
+				<ul class="nav-links">
+					<li><a href="./index.html#about" class="nav-link">About</a></li>
+					<li><a href="./index.html#volunteer" class="nav-link">Volunteer</a></li>
+					<li><a href="./index.html#meetings" class="nav-link">Meetings</a></li>
+					<li><a href="./calendar.html" class="nav-link-active">Calendar</a></li>
+					<li>
+						<a href="./donate.html" class="nav-donate">
+							<i class="fa-solid fa-hand-holding-heart"></i> Donate
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="nav-mobile">
+				<ul class="nav-mobile-list">
+					<li><a href="./index.html#about" class="nav-mobile-link">About</a></li>
+					<li><a href="./index.html#volunteer" class="nav-mobile-link">Volunteer</a></li>
+					<li><a href="./index.html#meetings" class="nav-mobile-link">Meetings</a></li>
+					<li><a href="./calendar.html" class="nav-mobile-link-active">Calendar</a></li>
+					<li>
+						<a href="./donate.html" class="nav-donate nav-donate-mobile">
+							<i class="fa-solid fa-hand-holding-heart"></i> Donate
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<main id="main" class="page-main" role="main" tabindex="-1">
+		<div class="page-shell-wide">
+			<section class="hero-panel hero-gradient">
+				<p class="hero-kicker">Fallbrook Ranch Lions Club</p>
+				<h1 class="hero-title">Events Calendar</h1>
+				<p class="hero-copy">Club meetings, fundraisers, service projects, and community events around Fallbrook.</p>
+			</section>
+
+            <div id="calendar-grid" class="calendar-grid-wrap"></div>
+
+            <section class="section-card-compact">
+                <div class="divider calendar-details-divider"><span class="divider-label">Upcoming Events</span></div>
+                <p id="calendar-list-summary" class="calendar-list-summary"></p>
+                <div id="calendar-list" class="calendar-event-list"></div>
+            </section>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		<div class="site-footer-inner">
+			<img src="https://fallbrooklions.org/images/logo/lionlogo_1500.png" alt="Lions International Logo" class="site-footer-logo" />
+			<p class="site-footer-text">The Fallbrook Ranch Lions Club Foundation (EIN 41-4225752) is a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code. Contributions to the Foundation are tax-deductible as permitted by law. Contributions made directly to Fallbrook Ranch Lions Club are not tax-deductible.</p>
+			<p class="site-footer-credit">Website by <a href="https://dellaport.dev" target="_blank" class="underline">Dellaport.dev</a>, a local Lions Club member.</p>
+		</div>
+	</footer>
+</body>
+</html>

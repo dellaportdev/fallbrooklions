@@ -1,0 +1,18 @@
+.calendar-inline-code {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 0.25rem;
+    padding: 0.05rem 0.3rem;
+}
+
+.calendar-chip span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calendar-day-heading:nth-child(7n) {
+    border-right: 0;
+}
+
+.calendar-day:nth-child(7n) {
+    border-right: 0;
+}

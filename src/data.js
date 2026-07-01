@@ -1,4 +1,4 @@
-const memberPhotoPath = './images/members/';
+		const memberPhotoPath = './images/members/';
 		const members = [
 			{ name: 'Alfonso Ramos', 	role: 'President', 				image: 'alfonso.png', 	email:'fallbrooklions@gmail.com'},
 			{ name: 'Gus Romero', 		role: 'First Vice President', 	image: 'gus.png' },
